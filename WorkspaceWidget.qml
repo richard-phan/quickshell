@@ -11,6 +11,7 @@ Rectangle {
     height: implicitHeight
 
     color: Theme.surface
+    radius: 4
 
     Row {
         id: workspaceRow

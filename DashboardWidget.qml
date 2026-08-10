@@ -4,8 +4,8 @@ import "."
 
 Widget {
   bgColor: Theme.surface
-  icon: ""
-  text: "ARCH"
+  icon: "󰣇"
+  text: ""
   textColor: Theme.foreground
 
   property var systemDashboard

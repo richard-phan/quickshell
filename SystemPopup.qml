@@ -2,65 +2,126 @@ import "."
 
 import QtQuick
 import QtQuick.Layouts
+import QtQuick.Shapes
 import Quickshell
 
 PanelWindow {
     id: systemInfoWindow
-    visible: !WindowStates.dashboardVisible
-    anchors { top: true; left: true }
 
-    implicitWidth: 300
-    implicitHeight: 220
+    visible: true
+
+    anchors {
+        top: true
+        left: true
+    }
+
+    // Bar height + dashboard height
+    implicitWidth: 350
+    implicitHeight: barHeight + dashboardHeight
+
+    color: "transparent"
+
+    property int barHeight: 30
+    property int dashboardHeight: 250
+
+    exclusionMode: ExclusionMode.Ignore
+
+    mask: Region {
+        item: WindowStates.dashboardVisible ? slidingRect : null
+    }
 
     Rectangle {
-        anchors.fill: parent
-        color: Theme.surface
-        bottomRightRadius: 15
+        id: slidingRect
 
-        ColumnLayout {
-            anchors.fill: parent
-            anchors.margins: 10
+        width: systemInfoWindow.implicitWidth
+        height: systemInfoWindow.dashboardHeight
+
+        y: WindowStates.dashboardVisible
+           ? systemInfoWindow.barHeight
+           : systemInfoWindow.barHeight - height
+
+        color: Theme.surface
+
+        bottomRightRadius: 10
+        clip: true
+
+        Behavior on y {
+            NumberAnimation {
+                duration: 250
+                easing.type: Easing.OutQuart
+            }
+        }
+
+        Column {
+            x: 10
+            y: 10
+
+            width: slidingRect.width - 20
+            spacing: 15
 
             Text {
-                text: "󰞱   System Overview"
+                text: "System Overview"
                 color: Theme.foreground
-                Layout.fillWidth: true
-                Layout.alignment: Qt.AlignTop | Qt.AlignLeft
                 font.bold: true
             }
 
+            Connections {
+                target: System
+
+                function onDataChanged() {
+                    infoTable.model.setProperty(0, "value", System.cpu)
+                    infoTable.model.setProperty(1, "value", System.memory)
+                    infoTable.model.setProperty(2, "value", System.storage)
+                }
+            }
+
             Repeater {
+                id: infoTable
+
                 model: ListModel {
-                    ListElement { title: "CPU"; icon: ""; value: 12; color: "Theme.green" }
-                    ListElement { title: "Memory"; icon: ""; value: 34; color: "Theme.blue" }
-                    ListElement { title: "Storage"; icon: ""; value: 56; color: "Theme.purple" }
+                    ListElement {
+                        title: "CPU"
+                        icon: ""
+                        value: 0
+                        color: "green"
+                    }
+
+                    ListElement {
+                        title: "Memory"
+                        icon: ""
+                        value: 0
+                        color: "blue"
+                    }
+
+                    ListElement {
+                        title: "Storage"
+                        icon: ""
+                        value: 0
+                        color: "purple"
+                    }
                 }
 
-                delegate: Rectangle {
-                    Layout.fillWidth: true
+                delegate: Item {
+                    width: slidingRect.width - 20
                     height: 50
-                    color: Theme.surface
 
                     Row {
                         anchors.fill: parent
                         spacing: 10
 
-                        Item {
+                        Rectangle {
                             width: 40
                             height: 40
+                            radius: 10
+
                             anchors.verticalCenter: parent.verticalCenter
 
-                            Rectangle {
-                                anchors.fill: parent
-                                radius: 10
-                                color: Theme.elevated
-
-                            }
+                            color: Theme.elevated
 
                             Text {
                                 text: model.icon
                                 anchors.centerIn: parent
-                                color: Theme.blue
+                                color: Theme[model.color]
                                 font.pointSize: 16
                             }
                         }
@@ -74,10 +135,9 @@ PanelWindow {
                                 color: Theme.foreground
                                 font.bold: true
                             }
-                            
+
                             Item {
-                                id: fullBar
-                                width: 180
+                                width: slidingRect.width - 120
                                 height: 10
 
                                 Rectangle {
@@ -87,26 +147,23 @@ PanelWindow {
                                 }
 
                                 Rectangle {
-                                    id: progressBar
-                                    width: model.value / 100
+                                    width: parent.width * (model.value / 100)
                                     height: parent.height
                                     radius: height / 2
-                                    color: Theme.blue
+                                    color: Theme[model.color]
                                 }
                             }
                         }
 
-                        Column {
-                            anchors.verticalCenter: parent.verticalCenter
+                        Item {
+                            width: 40
+                            height: parent.height
 
                             Text {
-                                text: model.value + "%"
-                                color: Theme.blue
-                            }
-
-                            Text {
+                                anchors.centerIn: parent
                                 text: model.value + "%"
                                 color: Theme.foreground
+                                font.bold: true
                             }
                         }
                     }
