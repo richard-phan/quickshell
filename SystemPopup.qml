@@ -4,6 +4,7 @@ import QtQuick
 import QtQuick.Layouts
 import QtQuick.Shapes
 import Quickshell
+import Quickshell.Wayland
 
 PanelWindow {
     id: systemInfoWindow
@@ -21,9 +22,11 @@ PanelWindow {
 
     color: "transparent"
 
+    WlrLayershell.layer: WlrLayer.Top
+
     property int barHeight: 30
     property int dashboardHeight: 250
-
+    
     exclusionMode: ExclusionMode.Ignore
 
     mask: Region {

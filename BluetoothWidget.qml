@@ -24,5 +24,9 @@ Widget {
           case BluetoothAdapterState.Blocked:   return "󰂲"
           default: return ""
     }
-  }
+}
+MouseArea {
+         anchors.fill: parent
+        onClicked: WindowStates.bluetoothVisible = !WindowStates.bluetoothVisible
+    }
 }
