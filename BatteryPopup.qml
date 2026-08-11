@@ -5,8 +5,8 @@ import Quickshell.Io
 import Quickshell.Services.UPower
 
 PopupWidget {
-    implicitWidth: 200
-    implicitHeight: 130
+    implicitWidth: mainContent.implicitWidth
+    implicitHeight: mainContent.implicitHeight
 
     isWindowVisible: WindowStates.batteryVisible
 
@@ -16,13 +16,18 @@ PopupWidget {
     }
 
     Rectangle {
-        anchors.fill: parent
+        id: mainContent
+
+        property var padding: 40
+
+        implicitWidth: contentLayout.implicitWidth + padding
+        implicitHeight: contentLayout.implicitHeight + padding
+
         color: Theme.surface
 
         Column {
-            x: 15
-            y: 15
-            width: parent.width - (x * 2)
+            id: contentLayout
+            anchors.centerIn: parent
             spacing: 10
 
             Text {

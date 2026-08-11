@@ -22,5 +22,7 @@ Scope {
 
     BatteryPopup {}
 
+    VolumePopup {}
+
     Bar {}
 }
