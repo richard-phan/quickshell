@@ -13,6 +13,8 @@ Scope {
                 WindowStates.bluetoothVisible = false
             if (WindowStates.batteryVisible)
                 WindowStates.batteryVisible = false
+            if (WindowStates.volumeVisible)
+                WindowStates.volumeVisible = false
         }
     }
 

@@ -19,5 +19,7 @@ Widget {
             }
         }
     }
+
+    tapHandler.onTapped: WindowStates.volumeVisible = !WindowStates.volumeVisible
 }
 

@@ -5,7 +5,7 @@ PopupWidget {
     implicitWidth: mainContent.implicitWidth
     implicitHeight: mainContent.implicitHeight
 
-    isWindowVisible: true
+    isWindowVisible: WindowStates.volumeVisible
 
     anchors {
         top: true
@@ -25,10 +25,11 @@ PopupWidget {
         Row {
             id: contentLayout
             anchors.centerIn: parent
-            spacing: 15
+            spacing: 12
 
             Column {
-                spacing: 5
+                // FIX: Convert these to single vertical element
+                spacing: 10
 
                 Item {
                     width: volumeMax.width
@@ -64,7 +65,6 @@ PopupWidget {
 
                             function getVolumePercent(y) {
                                 const volPercent = (height - y) / height
-                                console.log(volPercent)
                                 return volPercent <= 1 && volPercent >= 0 
                                     ? volPercent 
                                     : undefined
@@ -88,9 +88,43 @@ PopupWidget {
                     }
                 }
 
-                Text {
-                    text: "V"
-                    color: Theme.foreground
+                Item {
+                    width: muteButton.width
+                    height: muteButton.height
+                    // FIX: align center
+
+                    Rectangle {
+                        id: muteButton
+                        width: 20
+                        height: 20
+                        radius: 4
+                        color: Audio.muted ? Theme.red : Theme.red
+
+                        anchors.centerIn: parent
+                    }
+
+                    Text {
+                        text: Audio.muted ? "" : ""
+                        color: Theme.background
+
+                        anchors.centerIn: parent
+                    }
+
+                    MouseArea {
+                        id: muteMouseArea
+                        anchors.fill: parent
+                        hoverEnabled: true
+
+                        onContainsMouseChanged: {
+                            if (muteMouseArea.containsMouse) {
+                                // TODO add mouse hover
+                            }
+                        }
+
+                        onClicked: {
+                            Audio.audio.muted = !Audio.audio.muted
+                        }
+                    }
                 }
             }
             

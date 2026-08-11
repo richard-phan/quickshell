@@ -27,15 +27,20 @@ Network
     - [ ] Disconnect
     - [ ] Password
 
-Volume
-    - [ ] change volume
-    - [ ] change volume source
-    - [ ] mute/unmute
+- [ ] Volume
+    - [ ] speaker
+        - [X] change volume
+        - [ ] change speaker source
+        - [X] mute/unmute
+    - [ ] mic
+        - [X] change volume
+        - [ ] change mic source
+        - [X] mute/unmute
 
-Battery
-    - [ ] Show battery state
-    - [ ] show battery percentage
-    - [ ] change power mode
+- [X] Battery
+    - [X] Show battery state
+    - [X] show battery percentage
+    - [X] change power mode
 
 Notifications
     - [ ] view number count
