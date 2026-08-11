@@ -1,0 +1,43 @@
+Search
+    - [ ]
+
+Wallpaper Changer
+    - organize list
+
+Dashboard
+    - [ ] System
+    - [ ] Weather
+    - [ ] Power
+
+Lockscreen
+    - [ ] Lockscreen
+
+Bluetooth
+    - [ ] Connect
+    - [ ] Disconnect
+    - [ ] Trust
+    - [ ] Forget
+    - [ ] Scan
+    - [ ] Toggle
+
+Network
+    - [ ] Scan
+    - [ ] Show networks
+    - [ ] Show connected network
+    - [ ] Disconnect
+    - [ ] Password
+
+Volume
+    - [ ] change volume
+    - [ ] change volume source
+    - [ ] mute/unmute
+
+Battery
+    - [ ] Show battery state
+    - [ ] show battery percentage
+    - [ ] change power mode
+
+Notifications
+    - [ ] view number count
+    - [ ] view notifications
+    - [ ] dismiss notifications

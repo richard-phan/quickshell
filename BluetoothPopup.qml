@@ -62,6 +62,7 @@ PopupWidget {
                         }
 
                         onClicked: {
+                            // TODO: add bluetooth connection state and change
                             console.log('TOGGLING BLUETOOTH')
                         }
                     }
@@ -149,6 +150,7 @@ PopupWidget {
 
                                     onClicked: {
                                         console.log('CLICKED')
+                                        // TODO: add connection logic
                                     }
                                 }
                             }
@@ -162,7 +164,6 @@ PopupWidget {
                                 color: Theme.red
 
                                 Text {
-                                    // forget
                                     text: ""
                                     font.pointSize: 16
                                     anchors.centerIn: parent
@@ -183,7 +184,7 @@ PopupWidget {
                                     }
 
                                     onClicked: {
-                                        // forget device
+                                        // TODO:forget device
                                         console.log("forgetting device")
                                     }
                                 }

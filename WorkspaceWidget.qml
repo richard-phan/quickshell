@@ -18,24 +18,26 @@ Rectangle {
         spacing: 0
 
         Repeater {
-            model: Hyprland.workspaces
+            model: 5
 
             delegate: Widget {
                 horizontalPadding: 7
 
-                bgColor: modelData.focused
+                bgColor: Hyprland.focusedWorkspace.id === (index + 1)
                     ? Theme.primary
                     : Theme.surface
 
                 icon: ""
-                text: modelData.id
+                text: index + 1
 
-                textColor: modelData.focused
+                textColor: Hyprland.focusedWorkspace.id === (index + 1)
                     ? Theme.background
                     : Theme.foreground
 
-                hoverEnabled: !modelData.focused
-                tapHandler.onTapped: modelData.activate()
+                hoverEnabled: !(Hyprland.focusedWorkspace.id === (index + 1))
+                tapHandler.onTapped: Hyprland.dispatch(
+                    `hl.dsp.focus({ workspace = ${(index + 1)} })`
+                )
             }
         }
     }
