@@ -15,7 +15,9 @@ Widget {
   }
   textColor: Theme.foreground
 
-  function iconForBluetoothState(state) {
+	function iconForBluetoothState(state) {
+			if (BluetoothStates.numConnected > 0) return "󰂱"
+
       switch (state) {
           case BluetoothAdapterState.Enabled:   return "󰂯"
           case BluetoothAdapterState.Enabling:  return "󰂯" 

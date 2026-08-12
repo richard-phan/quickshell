@@ -1,6 +1,16 @@
 Search
     - [X] search for applications
 
+Media
+    - [X] show currently playing song
+    - [X] album art
+    - [X] track
+    - [X] artist
+    - [X] album
+    - [X] playback state and duration
+    - [X] play/pause
+    - [ ] seek
+
 Wallpaper Changer
     - [ ] organize list
 
