@@ -7,10 +7,12 @@ QtObject {
     property bool bluetoothVisible: false
     property bool batteryVisible: false
     property bool volumeVisible: false
+    property bool launcherVisible: false
 
     readonly property bool anyPopupVisible:
         dashboardVisible ||
         bluetoothVisible ||
         batteryVisible   ||
-        volumeVisible
+        volumeVisible    ||
+        launcherVisible
 }

@@ -14,6 +14,8 @@ PopupWidget {
         right: true
     }
 
+    margins.top: 30
+
     Rectangle {
         anchors.fill: parent
         color: Theme.surface

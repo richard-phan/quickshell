@@ -9,5 +9,6 @@ PanelWindow {
 
     property bool isWindowVisible
 
+    exclusionMode: ExclusionMode.Ignore
     WlrLayershell.layer: WlrLayer.Overlay
 }

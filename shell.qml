@@ -1,3 +1,4 @@
+import QtQuick
 import Quickshell
 
 import "."
@@ -15,16 +16,25 @@ Scope {
                 WindowStates.batteryVisible = false
             if (WindowStates.volumeVisible)
                 WindowStates.volumeVisible = false
+            if (WindowStates.launcherVisible)
+                WindowStates.launcherVisible = false
         }
     }
 
-    SystemPopup {}
+    Bar {
+        id: bar
+    }
+
+    LauncherPopup {
+        id: appLauncher
+        margins.top: 30
+    }
+
+//    SystemPopup {}
 
     BluetoothPopup {}
 
     BatteryPopup {}
 
     VolumePopup {}
-
-    Bar {}
 }

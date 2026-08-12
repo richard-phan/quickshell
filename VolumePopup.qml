@@ -12,6 +12,8 @@ PopupWidget {
         right: true
     }
 
+    margins.top: 30
+
     Rectangle {
         id: mainContent
 

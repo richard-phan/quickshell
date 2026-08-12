@@ -1,8 +1,8 @@
 Search
-    - [ ]
+    - [X] search for applications
 
 Wallpaper Changer
-    - organize list
+    - [ ] organize list
 
 Dashboard
     - [ ] System
