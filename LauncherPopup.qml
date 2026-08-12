@@ -64,8 +64,12 @@ PopupWidget {
                 }
 
                 searchTextBox.onAccepted: {
-                    const appId = parent.results[parent.searchIndex].id
-                    DesktopEntries.byId(appId).execute()
+                    if (parent.results.length > 0) {
+                        const appId = parent.results[parent.searchIndex].id
+                        DesktopEntries.byId(appId).execute()
+
+                        WindowStates.launcherVisible = false
+                    }
                 }
             }
 

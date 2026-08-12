@@ -18,6 +18,8 @@ Scope {
                 WindowStates.volumeVisible = false
             if (WindowStates.launcherVisible)
                 WindowStates.launcherVisible = false
+            if (WindowStates.mediaVisible)
+                WindowStates.mediaVisible = false
         }
     }
 
@@ -30,7 +32,9 @@ Scope {
         margins.top: 30
     }
 
-//    SystemPopup {}
+    //    SystemPopup {}
+    
+    MediaPopup {} 
 
     BluetoothPopup {}
 
