@@ -72,7 +72,7 @@ PopupWidget {
 						}
 
                         else if (event.key === Qt.Key_Escape) {
-								isWindowVisible = false
+								WindowStates.wallpaperVisible = false
 								event.accepted = true
                             }
                         else if (event.key === Qt.Key_Return) {
