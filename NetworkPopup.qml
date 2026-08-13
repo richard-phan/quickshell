@@ -7,7 +7,7 @@ PopupWidget {
   implicitWidth: mainContent.implicitWidth
   implicitHeight: mainContent.implicitHeight
 
-  isWindowVisible: true
+  isWindowVisible: !WindowStates.networkVisible
 
   anchors {
     top: true

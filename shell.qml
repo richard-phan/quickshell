@@ -22,6 +22,8 @@ Scope {
         WindowStates.mediaVisible = false;
       if (WindowStates.wallpaperVisible)
         WindowStates.wallpaperVisible = false;
+      if (WindowStates.networkVisible)
+        WindowStates.networkVisible = false;
     }
   }
 
