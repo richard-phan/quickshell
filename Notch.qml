@@ -24,27 +24,68 @@ Shape {
     strokeWidth: 0
 
     // away from shape
-    startX: leftSide ? 0 : mainContent.width + (triangle.notchWidth * 2)
+    startX: 0
     startY: 0
 
     // next to shape top
     PathLine {
-      x: leftSide ? triangle.notchWidth : mainContent.width + triangle.notchWidth
+      x: triangle.notchWidth
       y: 0
     }
 
     PathLine {
-      x: leftSide ? triangle.notchWidth : mainContent.width + triangle.notchWidth
-      y: leftSide ? triangle.notchHeight : triangle.notchHeight
+      x: triangle.notchWidth
+      y: triangle.notchHeight
     }
 
     PathArc {
-      x: leftSide ? 0 : mainContent.width + (triangle.notchWidth * 2)
+      x: 0
       y: 0
       radiusX: triangle.width
       radiusY: triangle.height
       useLargeArc: false
-      direction: leftSide ? PathArc.Counterclockwise : PathArc.Clockwise
+      direction: PathArc.Counterclockwise
+    }
+  }
+
+  // Rectangle {
+  //   x: triangle.notchWidth
+  //   y: 0
+  //   width: mainContent.width
+  //   height: mainContent.height + mainContent.y
+  //
+  //   bottomLeftRadius: 8
+  //   bottomRightRadius: 8
+  //
+  //   color: triangle.notchColor
+  // }
+
+  ShapePath {
+    fillColor: triangle.notchColor
+    strokeWidth: 0
+
+    // away from shape
+    startX: mainContent.width + (triangle.notchWidth * 2)
+    startY: 0
+
+    // next to shape top
+    PathLine {
+      x: mainContent.width + triangle.notchWidth
+      y: 0
+    }
+
+    PathLine {
+      x: mainContent.width + triangle.notchWidth
+      y: triangle.notchHeight
+    }
+
+    PathArc {
+      x: mainContent.width + (triangle.notchWidth * 2)
+      y: 0
+      radiusX: triangle.width
+      radiusY: triangle.height
+      useLargeArc: false
+      direction: PathArc.Clockwise
     }
   }
 }

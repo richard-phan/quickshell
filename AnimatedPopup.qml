@@ -4,18 +4,23 @@ import Quickshell
 import Quickshell.Wayland
 
 PanelWindow {
-  implicitWidth: mainContent.implicitWidth + leftNotch.width + rightNotch.width
+  id: root
+
+  visible: true
+
+  implicitWidth: mainContent.implicitWidth + (notchWidth * 2)
   implicitHeight: mainContent.implicitHeight
 
-  anchors.top: true
   margins.top: 30
 
   color: "transparent"
 
   property bool isWindowVisible
 
-  property int notchWidth: 20
-  property int notchHeight: 20
+  property real notchWidth: 20
+  property real notchHeight: 20
+
+  default property alias windowContent: mainContent.data
 
   mask: Region {
     item: mainContent
@@ -31,41 +36,36 @@ PanelWindow {
   exclusionMode: ExclusionMode.Ignore
   WlrLayershell.layer: WlrLayer.Overlay
 
-  Rectangle {
-    id: mainContent
-    implicitWidth: 250
-    implicitHeight: 100
-
-    bottomLeftRadius: 20
-    bottomRightRadius: 20
-
-    x: curvedTriangle.width
-    y: 0
-
-    anchors.centerIn: parent
-
-    color: Theme.background
-  }
-
   Notch {
     id: leftNotch
     mainContent: mainContent
-    notchWidth: 20
-    notchHeight: 20
+    notchWidth: root.notchWidth
+    notchHeight: Math.min(mainContent.y + mainContent.height, 25)
 
     notchColor: Theme.background
 
     leftSide: true
   }
 
-  Notch {
-    id: rightNotch
-    mainContent: mainContent
-    notchWidth: 20
-    notchHeight: 20
+  Rectangle {
+    id: mainContent
+    implicitWidth: 250
+    implicitHeight: 100
 
-    notchColor: Theme.background
+    bottomLeftRadius: bottomRightRadius
+    bottomRightRadius: Math.max(((mainContent.y + mainContent.height) / 100), 0.1) * 20
 
-    leftSide: false
+    color: Theme.background
+
+    x: leftNotch.width
+    y: root.isWindowVisible ? 0 : 0 - height
+    clip: true
+
+    Behavior on y {
+      NumberAnimation {
+        duration: 250
+        easing.type: Easing.OutQuart
+      }
+    }
   }
 }

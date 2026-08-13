@@ -48,5 +48,5 @@ Scope {
 
   VolumePopup {}
 
-  AnimatedPopup {}
+  RealDashboard {}
 }
