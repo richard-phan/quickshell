@@ -21,6 +21,8 @@ Rectangle {
 
     Text {
       text: networkName
+      color: Theme.foreground
+      font.bold: true
     }
 
     Item {
@@ -31,11 +33,12 @@ Rectangle {
       btnWidth: 30
       btnHeight: btnWidth
 
-      radius: 5
+      radius: 4
 
       color: Theme.primary
 
-      btnText: "C"
+      btnText: true ? "" : ""
+      btnTextPointSize: 16
     }
 
     BackgroundButton {
@@ -44,7 +47,10 @@ Rectangle {
 
       radius: 4
 
-      color: Theme.mutedForeground
+      color: Theme.red
+
+      btnText: ""
+      btnTextPointSize: 16
     }
   }
 }

@@ -7,7 +7,7 @@ PopupWidget {
   implicitWidth: mainContent.implicitWidth
   implicitHeight: mainContent.implicitHeight
 
-  isWindowVisible: !WindowStates.networkVisible
+  isWindowVisible: WindowStates.networkVisible
 
   anchors {
     top: true
@@ -42,6 +42,7 @@ PopupWidget {
         Text {
           text: "Network"
           color: Theme.foreground
+          font.bold: true
         }
 
         Item {
@@ -71,14 +72,14 @@ PopupWidget {
 
           color: NetworkState.enabled ? Theme.green : Theme.red
 
-          btnText: NetworkState.enabled ? "C" : ""
+          btnText: NetworkState.enabled ? "" : ""
           btnTextColor: Theme.background
           btnTextPointSize: 14
         }
       }
 
       Repeater {
-        model: Networking.devices
+        model: NetworkState.connectedNetwork
 
         delegate: NetworkEntry {
           entryWidth: contentLayout.width
