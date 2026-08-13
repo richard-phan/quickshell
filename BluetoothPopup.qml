@@ -5,238 +5,229 @@ import Quickshell.Bluetooth
 import Quickshell.Widgets
 
 PopupWidget {
-    implicitWidth: mainContent.implicitWidth
-    implicitHeight: mainContent.implicitHeight
+  implicitWidth: mainContent.implicitWidth
+  implicitHeight: mainContent.implicitHeight
 
-    isWindowVisible: WindowStates.bluetoothVisible
+  isWindowVisible: WindowStates.bluetoothVisible
 
-    anchors {
-        top: true
-        right: true
-    }
+  anchors {
+    top: true
+    right: true
+  }
 
-    margins.top: 30
+  margins.top: 30
 
-    Rectangle {
-        id: mainContent
+  Rectangle {
+    id: mainContent
 
-        property var padding: 40
+    property var padding: 40
 
-        implicitWidth: contentLayout.implicitWidth + padding
-        implicitHeight: contentLayout.implicitHeight + padding
+    implicitWidth: contentLayout.implicitWidth + padding
+    implicitHeight: contentLayout.implicitHeight + padding
 
-        color: Theme.background
+    color: Theme.background
 
-        Column {
-            id: contentLayout
+    Column {
+      id: contentLayout
 
-            width: 300
+      width: 300
 
-            anchors.centerIn: mainContent
-            spacing: 20
+      anchors.centerIn: mainContent
+      spacing: 20
+
+      RowLayout {
+        width: parent.width
+
+        Text {
+          text: "Bluetooth"
+          color: Theme.foreground
+          font.bold: true
+        }
+
+        Item {
+          Layout.fillWidth: true
+        }
+
+        Rectangle {
+          width: 30
+          height: width
+          radius: 5
+
+          color: Theme.blue
+
+          Text {
+            text: ""
+            anchors.centerIn: parent
+
+            color: Theme.background
+          }
+        }
+        Rectangle {
+          width: 30
+          height: 30
+          radius: 5
+          color: BluetoothStates.enabled ? Theme.green : Theme.red
+
+          Text {
+            text: BluetoothStates.enabled ? "" : ""
+            anchors.centerIn: parent
+          }
+
+          MouseArea {
+            id: hoverAreaBluetooth
+            anchors.fill: parent
+            hoverEnabled: true
+
+            onContainsMouseChanged: {}
+
+            onClicked: {
+              Bluetooth.defaultAdapter.enabled = !Bluetooth.defaultAdapter.enabled;
+            }
+          }
+        }
+      }
+
+      ColumnLayout {
+        width: parent.width
+        spacing: 5
+
+        Repeater {
+          id: devices
+
+          model: BluetoothStates.devices
+
+          delegate: Rectangle {
+            id: deviceRow
+            width: parent.width
+            implicitHeight: row.implicitHeight + 20
+            color: Theme.elevated
+            radius: 10
 
             RowLayout {
-                width: parent.width
+              id: row
+              anchors.fill: parent
+              anchors.margins: 10
+              spacing: 10
+
+              Item {
+                width: 40
+                height: width
+
+                Rectangle {
+                  anchors.fill: parent
+                  radius: 4
+
+                  color: Theme.surface
+                }
+
+                IconImage {
+                  width: 40
+                  height: 40
+                  source: Quickshell.iconPath(modelData.icon)
+                }
+              }
+
+              ColumnLayout {
+                Text {
+                  text: modelData.name
+                  color: Theme.foreground
+                  font.bold: true
+                }
 
                 Text {
-                    text: "Bluetooth"
-                    color: Theme.foreground
-                    font.bold: true
+                  text: modelData.connected ? "Connected" : "Paired"
+                  color: Theme.mutedForeground
+                  font.bold: true
                 }
+              }
 
-                Item {
-                    Layout.fillWidth: true
-								}
+              Item {
+                Layout.fillWidth: true
+              }
 
-								Rectangle {
-										width: 30
-										height: width
-										radius: 5
+              Text {
+                text: modelData.batteryAvailable ? modelData.battery * 100 + "%" : ""
+                color: Theme.foreground
+                font.bold: true
+              }
 
-										color: Theme.blue
+              RowLayout {
+                spacing: 0
 
-										Text {
-												text: ""
-												anchors.centerIn: parent
-
-												color: Theme.background
-										}
-								}
                 Rectangle {
-                    width: 30
-                    height: 30
-                    radius: 5
-                    color: BluetoothStates.enabled ? Theme.green : Theme.red
+                  id: connectionBox
+                  width: 40
+                  height: 40
+                  topLeftRadius: 4
+                  bottomLeftRadius: 4
+                  color: Theme.blue
 
-                    Text {
-                        text: BluetoothStates.enabled ? "" : ""
-                        anchors.centerIn: parent
+                  Text {
+                    id: connectionIcon
+                    text: modelData.connected ? "" : ""
+                    anchors.centerIn: parent
+                    font.pointSize: 16
+                    color: Theme.background
+                  }
+
+                  MouseArea {
+                    id: hoverAreaConnect
+                    anchors.fill: parent
+                    hoverEnabled: true
+
+                    onContainsMouseChanged: {
+                      if (hoverAreaConnect.containsMouse) {
+                        connectionBox.color = Qt.lighter(parent.color, 1.2);
+                      } else {
+                        connectionBox.color = Theme.blue;
+                      }
                     }
 
-                    MouseArea {
-                        id: hoverAreaBluetooth
-                        anchors.fill: parent
-                        hoverEnabled: true
-
-												onContainsMouseChanged: {
-														
-                        }
-
-                        onClicked: {
-                            Bluetooth.defaultAdapter.enabled = !Bluetooth.defaultAdapter.enabled
-                        }
+                    onClicked: {
+                      modelData.connected = !modelData.connected;
                     }
+                  }
                 }
-            }
-            
-            ColumnLayout {
-                width: parent.width
-                spacing: 5
 
-                Repeater {
-                    id: devices
+                Rectangle {
+                  id: forgetBox
+                  width: 40
+                  height: 40
+                  topRightRadius: 4
+                  bottomRightRadius: 4
+                  color: Theme.red
 
-                    model: BluetoothStates.devices
+                  Text {
+                    text: ""
+                    font.pointSize: 16
+                    anchors.centerIn: parent
+                  }
 
-                    delegate: Rectangle {
-                        id: deviceRow
-                        width: parent.width
-                        implicitHeight: row.implicitHeight + 20
-                        color: Theme.elevated
-                        radius: 10
+                  MouseArea {
+                    id: hoverAreaForget
+                    anchors.fill: parent
+                    hoverEnabled: true
 
-                        RowLayout {
-                            id: row
-                            anchors.fill: parent
-                            anchors.margins: 10
-                            spacing: 10
-
-														Item {
-																width: 40
-																height: width
-
-																Rectangle {
-																		anchors.fill: parent
-																		radius: 4
-																		
-																		color: Theme.surface
-																}
-
-																IconImage {
-																		width: 40
-																		height: 40 
-																		source: Quickshell.iconPath(modelData.icon)
-																}
-														}
-
-                            ColumnLayout {
-                                Text {
-                                    text: modelData.name
-                                    color: Theme.foreground
-                                    font.bold: true
-                                }
-
-                                Text {
-                                    text: modelData.connected 
-                                        ? "Connected" 
-                                        : "Paired"
-                                    color: Theme.mutedForeground
-                                    font.bold: true
-                                }
-                            }
-
-                            Item {
-                                Layout.fillWidth: true
-                            }
-
-                            Text {
-                                text: modelData.batteryAvailable
-                                ? modelData.battery * 100 + "%"
-                                : ""
-                                color: Theme.foreground
-                                font.bold: true
-                            }
-
-                            RowLayout {
-                                spacing: 0
-
-                                Rectangle {
-                                    id: connectionBox
-                                    width: 40
-                                    height: 40
-                                    topLeftRadius: 4
-                                    bottomLeftRadius: 4
-                                    color: Theme.blue
-
-                                    Text {
-                                        id: connectionIcon
-                                        text: modelData.connected ? "" : ""
-                                        anchors.centerIn: parent
-                                        font.pointSize: 16
-                                        color: Theme.background
-                                    }
-
-                                    MouseArea {
-                                        id: hoverAreaConnect
-                                        anchors.fill: parent
-                                        hoverEnabled: true
-
-                                        onContainsMouseChanged: {
-                                            if (hoverAreaConnect.containsMouse) {
-                                                connectionBox.color = Qt.lighter(parent.color, 1.2)
-                                            }
-                                            else {
-                                                connectionBox.color = Theme.blue
-                                            }
-                                        }
-
-                                        onClicked: {
-																						// FIX: add connection logic
-																						if (modelData.trusted) modelData.connected = !modelData.connected
-                                        }
-                                    }
-                                }
-
-                                Rectangle {
-                                    id: forgetBox
-                                    width: 40
-                                    height: 40
-                                    topRightRadius: 4
-                                    bottomRightRadius: 4
-                                    color: Theme.red
-
-                                    Text {
-                                        text: ""
-                                        font.pointSize: 16
-                                        anchors.centerIn: parent
-                                    }
-
-                                    MouseArea {
-                                        id: hoverAreaForget
-                                        anchors.fill: parent
-                                        hoverEnabled: true
-
-                                        onContainsMouseChanged: {
-                                            if (hoverAreaForget.containsMouse) {
-                                                forgetBox.color = Qt.lighter(parent.color, 1.3)
-                                            }
-                                            else {
-                                                forgetBox.color = Theme.red
-                                            }
-                                        }
-
-                                        onClicked: {
-                                            // TODO:forget device
-																						console.log("forgetting device")
-																						if (modelData.connected) modelData.forget()
-                                        }
-                                    }
-                                }
-                            }
-                        }
+                    onContainsMouseChanged: {
+                      if (hoverAreaForget.containsMouse) {
+                        forgetBox.color = Qt.lighter(parent.color, 1.3);
+                      } else {
+                        forgetBox.color = Theme.red;
+                      }
                     }
+
+                    onClicked: {
+                      console.log("forgetting device");
+                      if (modelData.paired)
+                        modelData.forget();
+                    }
+                  }
                 }
+              }
             }
+          }
         }
+      }
     }
+  }
 }
