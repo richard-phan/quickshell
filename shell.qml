@@ -20,7 +20,13 @@ Scope {
                 WindowStates.launcherVisible = false
             if (WindowStates.mediaVisible)
                 WindowStates.mediaVisible = false
+            if (WindowStates.wallpaperVisible)
+                WindowStates.wallpaperVisible = false
         }
+    }
+
+    WallpaperPopup {
+        id: wallpaperChanger
     }
 
     Bar {
@@ -40,5 +46,6 @@ Scope {
 
     BatteryPopup {}
 
-    VolumePopup {}
+	VolumePopup {}
+
 }

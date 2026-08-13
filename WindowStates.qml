@@ -8,7 +8,8 @@ QtObject {
     property bool batteryVisible: false
     property bool volumeVisible: false
     property bool launcherVisible: false
-    property bool mediaVisible: false
+		property bool mediaVisible: false
+		property bool wallpaperVisible: false
 
     readonly property bool anyPopupVisible:
         dashboardVisible ||
@@ -16,5 +17,6 @@ QtObject {
         batteryVisible   ||
         volumeVisible    ||
         launcherVisible  ||
-        mediaVisible
+				mediaVisible		 ||
+				wallpaperVisible
 }
