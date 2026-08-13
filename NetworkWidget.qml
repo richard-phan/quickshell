@@ -10,10 +10,9 @@ Widget {
   tapHandler.onTapped: WindowStates.networkVisible = !WindowStates.networkVisible
 
   function iconForNetworkState(state) {
-    //console.log(wifi turned off 󱛅)
     switch (state) {
     case ConnectionState.Unknown:
-      return "U";
+      return "?";
     case ConnectionState.Connecting:
       return "󱛆";
     case ConnectionState.Disconnecting:

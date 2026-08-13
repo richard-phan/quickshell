@@ -48,42 +48,29 @@ PopupWidget {
           Layout.fillWidth: true
         }
 
-        Rectangle {
-          width: 30
-          height: width
-          radius: 5
+        BackgroundButton {
+          btnWidth: 30
+          btnHeight: 30
 
-          color: Theme.blue
+          radius: 4
 
-          Text {
-            text: ""
-            anchors.centerIn: parent
+          color: hoverHandler.hovered ? Theme.surface : "transparent"
 
-            color: Theme.background
-          }
+          btnText: ""
+          btnTextColor: Theme.foreground
         }
-        Rectangle {
-          width: 30
-          height: 30
-          radius: 5
+
+        BackgroundButton {
+          btnWidth: 30
+          btnHeight: 30
+
+          radius: 4
+
           color: BluetoothStates.enabled ? Theme.green : Theme.red
 
-          Text {
-            text: BluetoothStates.enabled ? "" : ""
-            anchors.centerIn: parent
-          }
+          btnText: BluetoothStates.enabled ? "" : ""
 
-          MouseArea {
-            id: hoverAreaBluetooth
-            anchors.fill: parent
-            hoverEnabled: true
-
-            onContainsMouseChanged: {}
-
-            onClicked: {
-              Bluetooth.defaultAdapter.enabled = !Bluetooth.defaultAdapter.enabled;
-            }
-          }
+          tapHandler.onTapped: Bluetooth.defaultAdapter.enabled = !BluetoothdefaultAdapter.enabled
         }
       }
 
