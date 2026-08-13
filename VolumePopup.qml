@@ -42,7 +42,7 @@ PopupWidget {
                         width: 15
                         height: 200
                         radius: width / 2
-                        
+
                         color: Theme.elevated
 
                         MouseArea {
@@ -52,24 +52,24 @@ PopupWidget {
 
                             drag.target: parent
                             drag.axis: y
-                            
-                            onPressed: (mouse) => {
-                                const vol = getVolumePercent(mouse.y)
-                                if (vol) Audio.audio.volume = vol
+
+                            onPressed: mouse => {
+                                const vol = getVolumePercent(mouse.y);
+                                if (vol)
+                                    Audio.audio.volume = vol;
                             }
-                            
-                            onPositionChanged: (mouse) => {
+
+                            onPositionChanged: mouse => {
                                 if (mouse.buttons & Qt.LeftButton) {
-                                    const vol = getVolumePercent(mouse.y)
-                                    if (vol) Audio.audio.volume = vol
+                                    const vol = getVolumePercent(mouse.y);
+                                    if (vol)
+                                        Audio.audio.volume = vol;
                                 }
                             }
 
                             function getVolumePercent(y) {
-                                const volPercent = (height - y) / height
-                                return volPercent <= 1 && volPercent >= 0 
-                                    ? volPercent 
-                                    : undefined
+                                const volPercent = (height - y) / height;
+                                return volPercent <= 1 && volPercent >= 0 ? volPercent : undefined;
                             }
                         }
                     }
@@ -83,10 +83,7 @@ PopupWidget {
 
                         y: ((100 - Audio.volume) / 100) * 200
 
-                        color: Audio.muted
-                            ? Theme.foreground
-                            : Theme.primary
-                        
+                        color: Audio.muted ? Theme.foreground : Theme.primary
                     }
                 }
 
@@ -124,12 +121,12 @@ PopupWidget {
                         }
 
                         onClicked: {
-                            Audio.audio.muted = !Audio.audio.muted
+                            Audio.audio.muted = !Audio.audio.muted;
                         }
                     }
                 }
             }
-            
+
             Column {
                 spacing: 5
 

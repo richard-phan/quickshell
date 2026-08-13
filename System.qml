@@ -1,32 +1,31 @@
+pragma Singleton
 import QtQuick
 import Quickshell
 import Quickshell.Io
 
-pragma Singleton
-
 QtObject {
-    id: root
+  id: root
 
-    signal dataChanged()
-    
-    property int cpu: 5
-    property int memory: 0
-    property int storage: 0
+  signal dataChanged
 
-    property Process sysProc: Process {
-        command: [Quickshell.env("HOME") + "/.config/quickshell/SystemMonitor"]
+  property int cpu: 5
+  property int memory: 0
+  property int storage: 0
 
-        running: true
+  property Process sysProc: Process {
+    command: [Quickshell.env("HOME") + "/.config/quickshell/SystemMonitor"]
 
-        stdout: SplitParser {
-            onRead: data => {
-                const columns = data.trim().split(/\s+/)
-                root.cpu = parseInt(columns[0])
-                root.memory = parseInt(columns[1])
-                root.storage = parseInt(columns[2])
+    running: true
 
-                root.dataChanged()
-            }
-        }
+    stdout: SplitParser {
+      onRead: data => {
+        const columns = data.trim().split(/\s+/);
+        root.cpu = parseInt(columns[0]);
+        root.memory = parseInt(columns[1]);
+        root.storage = parseInt(columns[2]);
+
+        root.dataChanged();
+      }
     }
+  }
 }

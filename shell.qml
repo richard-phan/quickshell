@@ -49,4 +49,9 @@ Scope {
   VolumePopup {}
 
   RealDashboard {}
+  NetworkPopup {}
+
+  BatteryPopup {}
+
+  VolumePopup {}
 }
