@@ -1,177 +1,173 @@
 import "."
 
 import QtQuick
-import QtQuick.Layouts
-import QtQuick.Shapes
 import Quickshell
 import Quickshell.Wayland
 
 PanelWindow {
-    id: systemInfoWindow
+  id: systemInfoWindow
 
-    visible: true
+  visible: true
 
-    anchors {
-        top: true
-        left: true
+  anchors {
+    top: true
+    left: true
+  }
+
+  // Bar height + dashboard height
+  implicitWidth: 350
+  implicitHeight: barHeight + dashboardHeight
+
+  color: "transparent"
+
+  WlrLayershell.layer: WlrLayer.Top
+
+  property int barHeight: 30
+  property int dashboardHeight: 250
+
+  exclusionMode: ExclusionMode.Ignore
+
+  mask: Region {
+    item: WindowStates.dashboardVisible ? slidingRect : null
+  }
+
+  Rectangle {
+    id: slidingRect
+
+    width: systemInfoWindow.implicitWidth
+    height: systemInfoWindow.dashboardHeight
+
+    y: WindowStates.dashboardVisible ? systemInfoWindow.barHeight : systemInfoWindow.barHeight - height
+
+    color: Theme.surface
+
+    bottomRightRadius: 10
+    clip: true
+
+    Behavior on y {
+      NumberAnimation {
+        duration: 250
+        easing.type: Easing.OutQuart
+      }
     }
 
-    // Bar height + dashboard height
-    implicitWidth: 350
-    implicitHeight: barHeight + dashboardHeight
+    Column {
+      x: 10
+      y: 10
 
-    color: "transparent"
+      width: slidingRect.width - 20
+      spacing: 15
 
-    WlrLayershell.layer: WlrLayer.Top
+      Text {
+        text: "System Overview"
+        color: Theme.foreground
+        font.bold: true
+      }
 
-    property int barHeight: 30
-    property int dashboardHeight: 250
-    
-    exclusionMode: ExclusionMode.Ignore
+      Connections {
+        target: System
 
-    mask: Region {
-        item: WindowStates.dashboardVisible ? slidingRect : null
-    }
+        function onDataChanged() {
+          infoTable.model.setProperty(0, "value", System.cpu);
+          infoTable.model.setProperty(1, "value", System.memory);
+          infoTable.model.setProperty(2, "value", System.storage);
+        }
+      }
 
-    Rectangle {
-        id: slidingRect
+      Repeater {
+        id: infoTable
 
-        width: systemInfoWindow.implicitWidth
-        height: systemInfoWindow.dashboardHeight
+        model: ListModel {
+          ListElement {
+            title: "CPU"
+            icon: ""
+            value: 0
+            color: "green"
+          }
 
-        y: WindowStates.dashboardVisible
-           ? systemInfoWindow.barHeight
-           : systemInfoWindow.barHeight - height
+          ListElement {
+            title: "Memory"
+            icon: ""
+            value: 0
+            color: "blue"
+          }
 
-        color: Theme.surface
-
-        bottomRightRadius: 10
-        clip: true
-
-        Behavior on y {
-            NumberAnimation {
-                duration: 250
-                easing.type: Easing.OutQuart
-            }
+          ListElement {
+            title: "Storage"
+            icon: ""
+            value: 0
+            color: "purple"
+          }
         }
 
-        Column {
-            x: 10
-            y: 10
+        delegate: Item {
+          width: slidingRect.width - 20
+          height: 50
 
-            width: slidingRect.width - 20
-            spacing: 15
+          Row {
+            anchors.fill: parent
+            spacing: 10
 
-            Text {
-                text: "System Overview"
+            Rectangle {
+              width: 40
+              height: 40
+              radius: 10
+
+              anchors.verticalCenter: parent.verticalCenter
+
+              color: Theme.elevated
+
+              Text {
+                text: model.icon
+                anchors.centerIn: parent
+                color: Theme[model.color]
+                font.pointSize: 16
+              }
+            }
+
+            Column {
+              anchors.verticalCenter: parent.verticalCenter
+              spacing: 7
+
+              Text {
+                text: model.title
                 color: Theme.foreground
                 font.bold: true
-            }
+              }
 
-            Connections {
-                target: System
+              Item {
+                width: slidingRect.width - 120
+                height: 10
 
-                function onDataChanged() {
-                    infoTable.model.setProperty(0, "value", System.cpu)
-                    infoTable.model.setProperty(1, "value", System.memory)
-                    infoTable.model.setProperty(2, "value", System.storage)
-                }
-            }
-
-            Repeater {
-                id: infoTable
-
-                model: ListModel {
-                    ListElement {
-                        title: "CPU"
-                        icon: ""
-                        value: 0
-                        color: "green"
-                    }
-
-                    ListElement {
-                        title: "Memory"
-                        icon: ""
-                        value: 0
-                        color: "blue"
-                    }
-
-                    ListElement {
-                        title: "Storage"
-                        icon: ""
-                        value: 0
-                        color: "purple"
-                    }
+                Rectangle {
+                  anchors.fill: parent
+                  radius: height / 2
+                  color: Theme.elevated
                 }
 
-                delegate: Item {
-                    width: slidingRect.width - 20
-                    height: 50
-
-                    Row {
-                        anchors.fill: parent
-                        spacing: 10
-
-                        Rectangle {
-                            width: 40
-                            height: 40
-                            radius: 10
-
-                            anchors.verticalCenter: parent.verticalCenter
-
-                            color: Theme.elevated
-
-                            Text {
-                                text: model.icon
-                                anchors.centerIn: parent
-                                color: Theme[model.color]
-                                font.pointSize: 16
-                            }
-                        }
-
-                        Column {
-                            anchors.verticalCenter: parent.verticalCenter
-                            spacing: 7
-
-                            Text {
-                                text: model.title
-                                color: Theme.foreground
-                                font.bold: true
-                            }
-
-                            Item {
-                                width: slidingRect.width - 120
-                                height: 10
-
-                                Rectangle {
-                                    anchors.fill: parent
-                                    radius: height / 2
-                                    color: Theme.elevated
-                                }
-
-                                Rectangle {
-                                    width: parent.width * (model.value / 100)
-                                    height: parent.height
-                                    radius: height / 2
-                                    color: Theme[model.color]
-                                }
-                            }
-                        }
-
-                        Item {
-                            width: 40
-                            height: parent.height
-
-                            Text {
-                                anchors.centerIn: parent
-                                text: model.value + "%"
-                                color: Theme.foreground
-                                font.bold: true
-                            }
-                        }
-                    }
+                Rectangle {
+                  width: parent.width * (model.value / 100)
+                  height: parent.height
+                  radius: height / 2
+                  color: Theme[model.color]
                 }
+              }
             }
+
+            Item {
+              width: 40
+              height: parent.height
+
+              Text {
+                anchors.centerIn: parent
+                text: model.value + "%"
+                color: Theme.foreground
+                font.bold: true
+              }
+            }
+          }
         }
+      }
     }
+  }
 }
