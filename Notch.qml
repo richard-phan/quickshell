@@ -14,9 +14,6 @@ Shape {
 
   property color notchColor
 
-  // left or ride side
-  property bool leftSide
-
   preferredRendererType: Shape.CurveRenderer
 
   ShapePath {
@@ -48,17 +45,17 @@ Shape {
     }
   }
 
-  // Rectangle {
-  //   x: triangle.notchWidth
-  //   y: 0
-  //   width: mainContent.width
-  //   height: mainContent.height + mainContent.y
-  //
-  //   bottomLeftRadius: 8
-  //   bottomRightRadius: 8
-  //
-  //   color: triangle.notchColor
-  // }
+  Rectangle {
+    x: triangle.notchWidth
+    y: 0
+    width: mainContent.width
+    height: mainContent.height + mainContent.y
+
+    bottomLeftRadius: 20
+    bottomRightRadius: 20
+
+    color: triangle.notchColor
+  }
 
   ShapePath {
     fillColor: triangle.notchColor

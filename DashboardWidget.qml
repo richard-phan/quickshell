@@ -13,7 +13,7 @@ Widget {
   MouseArea {
     anchors.fill: parent
     onClicked: {
-      WindowStates.dashboardVisible = !WindowStates.dashboardVisible
+      WindowStates.dashboardVisible = !WindowStates.dashboardVisible;
     }
   }
 }

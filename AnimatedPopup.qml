@@ -6,7 +6,7 @@ import Quickshell.Wayland
 PanelWindow {
   id: root
 
-  visible: true
+  visible: animationTimer.running || isWindowVisible
 
   implicitWidth: mainContent.implicitWidth + (notchWidth * 2)
   implicitHeight: mainContent.implicitHeight
@@ -19,6 +19,7 @@ PanelWindow {
 
   property real notchWidth: 20
   property real notchHeight: 20
+  property color windowColor: Theme.background
 
   default property alias windowContent: mainContent.data
 
@@ -26,25 +27,32 @@ PanelWindow {
     item: mainContent
 
     Region {
-      item: leftNotch
-    }
-    Region {
-      item: rightNotch
+      item: notch
     }
   }
 
   exclusionMode: ExclusionMode.Ignore
   WlrLayershell.layer: WlrLayer.Overlay
 
+  Timer {
+    id: animationTimer
+    running: false
+
+    interval: 250
+  }
+
+  onIsWindowVisibleChanged: {
+    if (!isWindowVisible)
+      animationTimer.running = true;
+  }
+
   Notch {
-    id: leftNotch
+    id: notch
     mainContent: mainContent
     notchWidth: root.notchWidth
-    notchHeight: Math.min(mainContent.y + mainContent.height, 25)
+    notchHeight: Math.min(mainContent.y + mainContent.height, root.notchHeight)
 
-    notchColor: Theme.background
-
-    leftSide: true
+    notchColor: root.windowColor
   }
 
   Rectangle {
@@ -53,11 +61,11 @@ PanelWindow {
     implicitHeight: 100
 
     bottomLeftRadius: bottomRightRadius
-    bottomRightRadius: Math.max(((mainContent.y + mainContent.height) / 100), 0.1) * 20
+    bottomRightRadius: 20
 
-    color: Theme.background
+    color: root.windowColor
 
-    x: leftNotch.width
+    x: notch.width
     y: root.isWindowVisible ? 0 : 0 - height
     clip: true
 
