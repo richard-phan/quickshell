@@ -8,6 +8,9 @@ AnimatedPopup {
 
   isWindowVisible: WindowStates.mediaVisible
 
+  notchLeft: true
+  notchRight: true
+
   anchors {
     top: true
   }

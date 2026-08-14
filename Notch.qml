@@ -9,15 +9,20 @@ Shape {
   height: notchHeight
 
   property Rectangle mainContent
-  property int notchWidth
-  property int notchHeight
+  property int notchWidth: 20
+  property int notchHeight: 20
+  property bool notchLeft: true
+  property bool notchRight: true
 
   property color notchColor
+
+  readonly property real leftWidth: notchLeft ? notchWidth : 0
+  readonly property real rightWidth: notchRight ? notchWidth : 0
 
   preferredRendererType: Shape.CurveRenderer
 
   ShapePath {
-    fillColor: triangle.notchColor
+    fillColor: notchLeft ? notchColor : "transparent"
     strokeWidth: 0
 
     // away from shape
@@ -26,12 +31,12 @@ Shape {
 
     // next to shape top
     PathLine {
-      x: triangle.notchWidth
+      x: triangle.leftWidth
       y: 0
     }
 
     PathLine {
-      x: triangle.notchWidth
+      x: triangle.leftWidth
       y: triangle.notchHeight
     }
 
@@ -58,26 +63,26 @@ Shape {
   }
 
   ShapePath {
-    fillColor: triangle.notchColor
+    fillColor: notchRight ? notchColor : "transparent"
     strokeWidth: 0
 
     // away from shape
-    startX: mainContent.width + (triangle.notchWidth * 2)
+    startX: mainContent.width + (triangle.rightWidth * 2)
     startY: 0
 
     // next to shape top
     PathLine {
-      x: mainContent.width + triangle.notchWidth
+      x: mainContent.width + triangle.rightWidth
       y: 0
     }
 
     PathLine {
-      x: mainContent.width + triangle.notchWidth
+      x: mainContent.width + triangle.rightWidth
       y: triangle.notchHeight
     }
 
     PathArc {
-      x: mainContent.width + (triangle.notchWidth * 2)
+      x: mainContent.width + (triangle.rightWidth * 2)
       y: 0
       radiusX: triangle.width
       radiusY: triangle.height

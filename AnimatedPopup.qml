@@ -19,6 +19,10 @@ PanelWindow {
 
   property real notchWidth: 20
   property real notchHeight: 20
+
+  property bool notchLeft
+  property bool notchRight
+
   property color windowColor: Theme.background
 
   default property alias windowContent: mainContent.data
@@ -51,6 +55,8 @@ PanelWindow {
     mainContent: mainContent
     notchWidth: root.notchWidth
     notchHeight: Math.min(mainContent.y + mainContent.height, root.notchHeight)
+    notchLeft: root.notchLeft
+    notchRight: root.notchRight
 
     notchColor: root.windowColor
   }
