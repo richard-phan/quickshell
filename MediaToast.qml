@@ -17,7 +17,6 @@ AnimatedPopup {
     target: MediaService
 
     function onTrackTitleChanged() {
-      console.log(MediaService.activePlayer.dbusName);
       if (MediaService.activePlayer.dbusName == "org.mpris.MediaPlayer2.spotify") {
         WindowStates.mediaToastVisible = true;
         hideDelay.running = true;
