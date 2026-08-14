@@ -38,7 +38,7 @@ PanelWindow {
     id: animationTimer
     running: false
 
-    interval: 250
+    interval: 300
   }
 
   onIsWindowVisibleChanged: {
@@ -57,21 +57,24 @@ PanelWindow {
 
   Rectangle {
     id: mainContent
-    implicitWidth: 250
-    implicitHeight: 100
 
-    bottomLeftRadius: bottomRightRadius
+    property real padding: 40
+
+    implicitWidth: childrenRect.width + padding
+    implicitHeight: childrenRect.height + padding
+
+    bottomLeftRadius: 20
     bottomRightRadius: 20
 
     color: root.windowColor
 
     x: notch.width
-    y: root.isWindowVisible ? 0 : 0 - height
+    y: root.isWindowVisible ? 0 : -height
     clip: true
 
     Behavior on y {
       NumberAnimation {
-        duration: 250
+        duration: 300
         easing.type: Easing.OutQuart
       }
     }
