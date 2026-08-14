@@ -3,6 +3,7 @@ pragma Singleton
 import QtQuick
 
 QtObject {
+  // Popups
   property bool dashboardVisible: false
   property bool bluetoothVisible: false
   property bool batteryVisible: false
@@ -11,6 +12,9 @@ QtObject {
   property bool mediaVisible: false
   property bool wallpaperVisible: false
   property bool networkVisible: false
+
+  // OSD
+  property bool mediaToastVisible: false
 
   readonly property bool anyPopupVisible: dashboardVisible || bluetoothVisible || batteryVisible || volumeVisible || launcherVisible || mediaVisible || wallpaperVisible || networkVisible
 }
