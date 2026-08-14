@@ -1,10 +1,10 @@
 import QtQuick
 
 Widget {
-    bgColor: Theme.surface
+    bgColor: Colors.primary_container
     icon: ""
     text: Time.time
-    textColor: Theme.foreground
+    textColor: Colors.on_primary_container
 
     tapHandler.onTapped: WindowStates.mediaVisible = !WindowStates.mediaVisible
 }

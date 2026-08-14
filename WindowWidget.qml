@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell.Hyprland
 
 Widget {
-    bgColor: Theme.surface
+    bgColor: Colors.primary_container
     icon: ""
     text: {
         const maxLength = 40
@@ -12,5 +12,5 @@ Widget {
             ? title
             : title.substring(0, maxLength) + "..."
     }
-    textColor: Theme.foreground
+    textColor: Colors.on_primary_container
 }

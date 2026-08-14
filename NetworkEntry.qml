@@ -21,7 +21,7 @@ Rectangle {
 
     Text {
       text: networkName
-      color: Theme.foreground
+      color: Colors.on_primary_container
       font.bold: true
     }
 
@@ -35,7 +35,7 @@ Rectangle {
 
       radius: 4
 
-      color: Theme.primary
+      color: Colors.on_primary_container
 
       btnText: true ? "" : ""
       btnTextPointSize: 16
@@ -47,7 +47,7 @@ Rectangle {
 
       radius: 4
 
-      color: Theme.red
+      color: Colors.error
 
       btnText: ""
       btnTextPointSize: 16

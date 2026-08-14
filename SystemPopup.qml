@@ -39,7 +39,7 @@ PanelWindow {
 
     y: WindowStates.dashboardVisible ? systemInfoWindow.barHeight : systemInfoWindow.barHeight - height
 
-    color: Theme.surface
+    color: Colors.surface
 
     bottomRightRadius: 10
     clip: true
@@ -60,7 +60,7 @@ PanelWindow {
 
       Text {
         text: "System Overview"
-        color: Theme.foreground
+        color: Colors.foreground
         font.bold: true
       }
 
@@ -115,12 +115,12 @@ PanelWindow {
 
               anchors.verticalCenter: parent.verticalCenter
 
-              color: Theme.elevated
+              color: Colors.elevated
 
               Text {
                 text: model.icon
                 anchors.centerIn: parent
-                color: Theme[model.color]
+                color: Colors[model.color]
                 font.pointSize: 16
               }
             }
@@ -131,7 +131,7 @@ PanelWindow {
 
               Text {
                 text: model.title
-                color: Theme.foreground
+                color: Colors.foreground
                 font.bold: true
               }
 
@@ -142,14 +142,14 @@ PanelWindow {
                 Rectangle {
                   anchors.fill: parent
                   radius: height / 2
-                  color: Theme.elevated
+                  color: Colors.elevated
                 }
 
                 Rectangle {
                   width: parent.width * (model.value / 100)
                   height: parent.height
                   radius: height / 2
-                  color: Theme[model.color]
+                  color: Colors[model.color]
                 }
               }
             }
@@ -161,7 +161,7 @@ PanelWindow {
               Text {
                 anchors.centerIn: parent
                 text: model.value + "%"
-                color: Theme.foreground
+                color: Colors.foreground
                 font.bold: true
               }
             }

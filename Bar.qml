@@ -12,7 +12,7 @@ Scope {
     PanelWindow {
       required property var modelData
       screen: modelData
-      color: Theme.background
+      color: Colors.primary
       anchors {
         top: true
         left: true
@@ -28,11 +28,11 @@ Scope {
         anchors.leftMargin: 5
 
         DashboardWidget {}
-
+        
         WorkspaceWidget {}
-
+        
         Media {}
-
+        
         WindowWidget {}
       }
 
@@ -51,13 +51,13 @@ Scope {
         anchors.rightMargin: 5
 
         BluetoothWidget {}
-
+        
         NetworkWidget {}
-
+        
         AudioWidget {}
-
+        
         BatteryWidget {}
-
+        
         NotificationWidget {}
       }
     }

@@ -3,10 +3,10 @@ import QtQuick
 import "."
 
 Widget {
-  bgColor: Theme.surface
+  bgColor: Colors.primary_container
   icon: "󰣇"
   text: ""
-  textColor: Theme.foreground
+  textColor: Colors.on_primary_container
 
   property var systemDashboard
 

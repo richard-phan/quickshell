@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell.Bluetooth
 
 Widget {
-  bgColor: Theme.surface
+  bgColor: Colors.primary_container
   icon: iconForBluetoothState(Bluetooth.defaultAdapter.state)
   text: {
     let connected = []
@@ -13,7 +13,7 @@ Widget {
     if (connected.length == 1) return connected[0]
     return connected.length + " Connected"
   }
-  textColor: Theme.foreground
+  textColor: Colors.on_primary_container
 
 	function iconForBluetoothState(state) {
 			if (BluetoothStates.numConnected > 0) return "󰂱"

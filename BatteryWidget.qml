@@ -2,7 +2,7 @@ import QtQuick
 import Quickshell.Services.UPower
 
 Widget {
-  bgColor: Theme.surface
+  bgColor: Colors.primary_container
   icon: {
       switch (BatteryService.powerMode) {
           case "Unknown": return ""
@@ -30,7 +30,7 @@ Widget {
     }
   }
   text: BatteryService.batteryPercentage + "%"
-  textColor: Theme.foreground
+  textColor: Colors.on_primary_container
 
   MouseArea {
       anchors.fill: parent

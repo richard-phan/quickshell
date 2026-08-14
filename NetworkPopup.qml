@@ -29,7 +29,7 @@ AnimatedPopup {
 
       Text {
         text: "Network"
-        color: Theme.foreground
+        color: Colors.primary_container
         font.bold: true
       }
 
@@ -43,10 +43,10 @@ AnimatedPopup {
 
         radius: 4
 
-        color: hoverHandler.hovered ? Theme.surface : "transparent"
+        color: hoverHandler.hovered ? Colors.inverse_primary : "transparent"
 
         btnText: "󰑐"
-        btnTextColor: Theme.foreground
+        btnTextColor: hoverHandler.hovered ? Colors.on_primary_container : Colors.on_primary
         btnTextPointSize: 14
 
         tapHandler.onTapped: NetworkState.enableScan = true
@@ -58,10 +58,10 @@ AnimatedPopup {
 
         radius: 4
 
-        color: NetworkState.enabled ? Theme.green : Theme.red
+        color: NetworkState.enabled ? Colors.tertiary : Colors.error
 
         btnText: NetworkState.enabled ? "" : ""
-        btnTextColor: Theme.background
+        btnTextColor: Colors.background
         btnTextPointSize: 14
       }
     }
@@ -74,7 +74,7 @@ AnimatedPopup {
         entryHeight: 50
         entryPadding: 30
 
-        entryColor: Theme.elevated
+        entryColor: Colors.primary_container
 
         radius: 10
 

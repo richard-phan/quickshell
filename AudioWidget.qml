@@ -2,10 +2,10 @@ import QtQuick
 import Quickshell.Services.Pipewire
 
 Widget {
-    bgColor: Theme.surface
+    bgColor: Colors.primary_container
     icon: iconForVolume(Audio.muted, Audio.volume)
     text: Audio.volume + "%"
-    textColor: Theme.foreground
+    textColor: Colors.on_primary_container
 
     function iconForVolume(muted, volume) {
         if (muted) return ""

@@ -23,7 +23,7 @@ PanelWindow {
   property bool notchLeft
   property bool notchRight
 
-  property color windowColor: Theme.background
+  property color windowColor: Colors.primary
 
   default property alias windowContent: mainContent.data
 
