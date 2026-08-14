@@ -4,120 +4,109 @@ import Quickshell
 import Quickshell.Io
 import Quickshell.Services.UPower
 
-PopupWidget {
-    implicitWidth: mainContent.implicitWidth
-    implicitHeight: mainContent.implicitHeight
+AnimatedPopup {
+  id: root
 
-    isWindowVisible: WindowStates.batteryVisible
+  isWindowVisible: WindowStates.batteryVisible
 
-    anchors {
-        top: true
-        right: true
+  notchLeft: true
+  notchRight: true
+
+  anchors {
+    top: true
+    right: true
+  }
+
+  ColumnLayout {
+    id: contentLayout
+    anchors.centerIn: parent
+    spacing: 10
+
+    Text {
+      text: "Battery: " + BatteryService.powerMode
+      color: Theme.foreground
+      font.bold: true
     }
 
-    margins.top: 30
+    Text {
+      text: "Power profile: " + BatteryService.powerProfile
+      color: Theme.foreground
+      font.bold: true
+    }
 
-    Rectangle {
-        id: mainContent
+    Item {
+      width: parent.width
+      height: row.implicitHeight
 
-        property var padding: 40
+      Rectangle {
+        width: row.width
+        height: row.height
+        radius: height / 2
+        color: Theme.elevated
+      }
+      Row {
+        id: row
 
-        implicitWidth: contentLayout.implicitWidth + padding
-        implicitHeight: contentLayout.implicitHeight + padding
+        spacing: 10
 
-        color: Theme.surface
+        Repeater {
+          model: ListModel {
+            ListElement {
+              text: "Power Saving"
+              icon: "󰌪"
+            }
+            ListElement {
+              text: "Balanced"
+              icon: ""
+            }
+            ListElement {
+              text: "Performance"
+              icon: "󱓞"
+            }
+          }
 
-        Column {
-            id: contentLayout
-            anchors.centerIn: parent
-            spacing: 10
+          delegate: Rectangle {
+            id: powerModeSelection
+            width: 45
+            height: width
+            radius: height / 2
+
+            property bool selected: model.text === BatteryService.powerProfile
+            property bool hovered: powerModeHover.containsMouse
+
+            color: selected ? Theme.primary : hovered ? Qt.lighter(Theme.elevated, 1.3) : Theme.elevated
 
             Text {
-                text: "Battery: " + BatteryService.powerMode
-                color: Theme.foreground
-                font.bold: true
-            }
-            
-            Text {
-                text: "Power profile: " + BatteryService.powerProfile
-                color: Theme.foreground
-                font.bold: true
+              anchors.centerIn: parent
+              text: model.icon
+              font.pointSize: 14
+              color: powerModeSelection.selected ? Theme.background : Theme.foreground
             }
 
-            Item {
-                width: parent.width
-                height: row.implicitHeight
+            MouseArea {
+              id: powerModeHover
+              anchors.fill: parent
+              hoverEnabled: !powerModeSelection.selected
 
-                Rectangle {
-                    anchors.centerIn: parent
-                    width: row.width
-                    height: row.height
-                    radius: height / 2
-                    color: Theme.elevated
+              onClicked: {
+                switch (model.text) {
+                case "Power Saving":
+                  PowerProfiles.profile = PowerProfile.PowerSaver;
+                  break;
+                case "Balanced":
+                  PowerProfiles.profile = PowerProfile.Balanced;
+                  break;
+                case "Performance":
+                  PowerProfiles.profile = PowerProfile.Performance;
+                  break;
+                default:
+                  return;
                 }
-                Row {
-                    id: row
-
-                    anchors.horizontalCenter: parent.horizontalCenter
-                    spacing: 10
-                    
-                    Repeater { 
-                        model: ListModel {
-                            ListElement { text: "Power Saving"; icon: "󰌪" }
-                            ListElement { text: "Balanced"; icon: "" }
-                            ListElement { text: "Performance"; icon: "󱓞" }
-                        }
-
-                        delegate: Rectangle {
-                            id: powerModeSelection
-                            width: 45
-                            height: width
-                            radius: height / 2
-
-                            property bool selected: model.text === BatteryService.powerProfile
-                            property bool hovered: powerModeHover.containsMouse
-
-                            color: selected
-                                ? Theme.primary
-                                : hovered
-                                    ? Qt.lighter(Theme.elevated, 1.3)
-                                    : Theme.elevated
-
-                            Text {
-                                anchors.centerIn: parent
-                                text: model.icon
-                                font.pointSize: 14
-                                color: powerModeSelection.selected
-                                    ? Theme.background
-                                    : Theme.foreground
-                            }
-
-                            MouseArea {
-                                id: powerModeHover
-                                anchors.fill: parent
-                                hoverEnabled: !powerModeSelection.selected
-
-                                onClicked: {
-                                    switch (model.text) {
-                                        case "Power Saving":
-                                            PowerProfiles.profile = PowerProfile.PowerSaver
-                                            break
-                                        case "Balanced":
-                                            PowerProfiles.profile = PowerProfile.Balanced
-                                            break
-                                        case "Performance":
-                                            PowerProfiles.profile = PowerProfile.Performance
-                                            break
-                                        default: 
-                                            return
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
+              }
             }
+          }
         }
+      }
     }
+  }
 }
-
