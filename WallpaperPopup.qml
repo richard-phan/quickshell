@@ -1,21 +1,20 @@
 import QtQuick
+import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
-PopupWidget {
+AnimatedPopup {
   id: wallpaperChanger
-
-  implicitWidth: mainContent.implicitWidth
-  implicitHeight: mainContent.implicitHeight
 
   isWindowVisible: WindowStates.wallpaperVisible
   focusable: true
 
+  notchLeft: true
+  notchRight: true
+
   anchors {
     top: true
   }
-
-  margins.top: 30
 
   IpcHandler {
     target: "wallpaperChanger"
@@ -41,25 +40,19 @@ PopupWidget {
     }
   }
 
-  Rectangle {
-    id: mainContent
-
-    property var padding: 40
-
-    implicitWidth: contentLayout.implicitWidth + padding
-    implicitHeight: contentLayout.implicitHeight + padding
-
-    bottomLeftRadius: 20
-    bottomRightRadius: 20
-
-    color: Theme.background
-
+  Item {
     focus: true
+
+    width: contentLayout.width
+    height: contentLayout.height
+
+    anchors.centerIn: parent
 
     Keys.onPressed: event => {
       if (event.key === Qt.Key_H) {
         if ((WallpaperService.index - 1) <= 0) {
           WallpaperService.index = WallpaperService.pictures.count - 1;
+          console.log('pressed');
         } else {
           WallpaperService.index--;
           wallpaperProcess.running = true;
@@ -79,11 +72,12 @@ PopupWidget {
       }
     }
 
-    Row {
+    RowLayout {
       id: contentLayout
 
-      anchors.centerIn: mainContent
       spacing: 10
+
+      focus: true
 
       Repeater {
         model: 5

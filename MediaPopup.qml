@@ -20,7 +20,7 @@ AnimatedPopup {
 
     anchors.centerIn: parent
 
-    spacing: 10
+    spacing: 20
 
     ClippingWrapperRectangle {
       width: 150

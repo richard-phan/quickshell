@@ -3,95 +3,82 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Networking
 
-PopupWidget {
-  implicitWidth: mainContent.implicitWidth
-  implicitHeight: mainContent.implicitHeight
+AnimatedPopup {
+  id: root
 
   isWindowVisible: WindowStates.networkVisible
+
+  notchLeft: true
+  notchRight: true
 
   anchors {
     top: true
     right: true
   }
 
-  margins.top: 30 // bar height
+  ColumnLayout {
+    id: contentLayout
 
-  Rectangle {
-    id: mainContent
+    width: 300
 
-    anchors.fill: parent
+    anchors.centerIn: parent
 
-    property int padding: 40
+    spacing: 10
 
-    implicitWidth: contentLayout.width + padding
-    implicitHeight: contentLayout.height + padding
+    RowLayout {
 
-    color: Theme.background
-
-    ColumnLayout {
-      id: contentLayout
-
-      anchors.centerIn: parent
-
-      spacing: 10
-
-      width: 300
-
-      RowLayout {
-
-        Text {
-          text: "Network"
-          color: Theme.foreground
-          font.bold: true
-        }
-
-        Item {
-          Layout.fillWidth: true
-        }
-
-        BackgroundButton {
-          btnWidth: 30
-          btnHeight: btnWidth
-
-          radius: 4
-
-          color: hoverHandler.hovered ? Theme.surface : "transparent"
-
-          btnText: "󰑐"
-          btnTextColor: Theme.foreground
-          btnTextPointSize: 14
-
-          tapHandler.onTapped: NetworkState.enableScan = true
-        }
-
-        BackgroundButton {
-          btnWidth: 30
-          btnHeight: btnWidth
-
-          radius: 4
-
-          color: NetworkState.enabled ? Theme.green : Theme.red
-
-          btnText: NetworkState.enabled ? "" : ""
-          btnTextColor: Theme.background
-          btnTextPointSize: 14
-        }
+      Text {
+        text: "Network"
+        color: Theme.foreground
+        font.bold: true
       }
 
-      Repeater {
-        model: NetworkState.connectedNetwork
+      Item {
+        Layout.fillWidth: true
+      }
 
-        delegate: NetworkEntry {
-          entryWidth: contentLayout.width
-          entryHeight: 50
-          entryPadding: 30
+      BackgroundButton {
+        btnWidth: 30
+        btnHeight: btnWidth
 
-          entryColor: Theme.elevated
+        radius: 4
 
-          radius: 10
+        color: hoverHandler.hovered ? Theme.surface : "transparent"
 
-          networkName: modelData.name
-        }
+        btnText: "󰑐"
+        btnTextColor: Theme.foreground
+        btnTextPointSize: 14
+
+        tapHandler.onTapped: NetworkState.enableScan = true
+      }
+
+      BackgroundButton {
+        btnWidth: 30
+        btnHeight: btnWidth
+
+        radius: 4
+
+        color: NetworkState.enabled ? Theme.green : Theme.red
+
+        btnText: NetworkState.enabled ? "" : ""
+        btnTextColor: Theme.background
+        btnTextPointSize: 14
+      }
+    }
+
+    Repeater {
+      model: NetworkState.connectedNetwork
+
+      delegate: NetworkEntry {
+        entryWidth: contentLayout.width
+        entryHeight: 50
+        entryPadding: 30
+
+        entryColor: Theme.elevated
+
+        radius: 10
+
+        networkName: modelData.name
       }
     }
   }
