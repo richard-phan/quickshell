@@ -17,9 +17,12 @@ AnimatedPopup {
     target: MediaService
 
     function onTrackTitleChanged() {
-      WindowStates.mediaToastVisible = true;
-      hideDelay.running = true;
-      hideDelay.restart();
+      console.log(MediaService.activePlayer.dbusName);
+      if (MediaService.activePlayer.dbusName == "org.mpris.MediaPlayer2.spotify") {
+        WindowStates.mediaToastVisible = true;
+        hideDelay.running = true;
+        hideDelay.restart();
+      }
     }
   }
 
