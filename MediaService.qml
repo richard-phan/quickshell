@@ -8,6 +8,7 @@ QtObject {
   readonly property list<MprisPlayer> playerList: Mpris.players.values
 
   property MprisPlayer lastActivePlayer: undefined
+  property string spotifyTrack: undefined
 
   readonly property MprisPlayer activePlayer: playerList.find(p => p.isPlaying) ?? lastActivePlayer
 
@@ -50,6 +51,12 @@ QtObject {
   onActivePlayerChanged: {
     if (activePlayer !== null) {
       lastActivePlayer = activePlayer;
+    }
+  }
+
+  onTrackTitleChanged: {
+    if (lastActivePlayer.dbusName === "org.mpris.MediaPlayer2.spotify") {
+      spotifyTrack = trackTitle;
     }
   }
 }

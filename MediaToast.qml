@@ -16,12 +16,10 @@ AnimatedPopup {
   Connections {
     target: MediaService
 
-    function onTrackTitleChanged() {
-      if (MediaService.activePlayer.dbusName == "org.mpris.MediaPlayer2.spotify") {
-        WindowStates.mediaToastVisible = true;
-        hideDelay.running = true;
-        hideDelay.restart();
-      }
+    function onSpotifyTrackChanged() {
+      WindowStates.mediaToastVisible = true;
+      hideDelay.running = true;
+      hideDelay.restart();
     }
   }
 
