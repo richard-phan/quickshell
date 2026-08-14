@@ -7,7 +7,9 @@ import Quickshell.Services.Mpris
 QtObject {
   readonly property list<MprisPlayer> playerList: Mpris.players.values
 
-  readonly property MprisPlayer activePlayer: playerList.find(p => p.isPlaying) ?? playerList[0]
+  property MprisPlayer lastActivePlayer: undefined
+
+  readonly property MprisPlayer activePlayer: playerList.find(p => p.isPlaying) ?? lastActivePlayer
 
   readonly property bool isPlaying: activePlayer?.playbackState === MprisPlaybackState.Playing
 
@@ -42,6 +44,12 @@ QtObject {
 
     onTriggered: {
       activePlayer?.positionChanged();
+    }
+  }
+
+  onActivePlayerChanged: {
+    if (activePlayer !== null) {
+      lastActivePlayer = activePlayer;
     }
   }
 }
