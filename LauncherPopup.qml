@@ -4,13 +4,15 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
-PopupWidget {
+AnimatedPopup {
   id: appLauncher
-  implicitWidth: mainContent.width
-  implicitHeight: mainContent.height
 
   isWindowVisible: WindowStates.launcherVisible
+
   focusable: true
+
+  notchLeft: true
+  notchRight: true
 
   anchors {
     top: true
@@ -34,21 +36,17 @@ PopupWidget {
     }
   }
 
-  Rectangle {
+  Item {
     id: mainContent
 
-    property var padding: 40
-    bottomLeftRadius: 20
-    bottomRightRadius: 20
+    width: contentLayout.width
+    height: contentLayout.height
 
-    implicitWidth: contentLayout.implicitWidth + padding
-    implicitHeight: contentLayout.implicitHeight + padding
+    anchors.centerIn: parent
 
-    color: Theme.background
-
-    Column {
+    ColumnLayout {
       id: contentLayout
-      anchors.centerIn: parent
+
       spacing: 10
 
       property var results: LauncherService.findApp("").slice(0, 5)
