@@ -35,25 +35,26 @@ Scope {
     id: bar
   }
 
-  LauncherPopup {
-    id: appLauncher
-    margins.top: 30
-  }
+LauncherPopup {
+  id: appLauncher
+  margins.top: 30
+}
 
-  //    SystemPopup {}
+// SystemPopup {}
 
-  MediaPopup {}
+MediaPopup {}
 
-  BluetoothPopup {}
+BluetoothPopup {}
 
-  BatteryPopup {}
+BatteryPopup {}
 
-  VolumePopup {}
+VolumePopup {}
 
-  RealDashboard {}
-  NetworkPopup {}
+RealDashboard {}
 
-  BatteryPopup {}
+NetworkPopup {}
 
-  VolumePopup {}
+BatteryPopup {}
+
+VolumePopup {}
 }

@@ -10,7 +10,7 @@ Rectangle {
     width: implicitWidth
     height: implicitHeight
 
-    color: Theme.surface
+    color: Colors.primary_container
     radius: 4
 
     Row {
@@ -24,15 +24,15 @@ Rectangle {
                 horizontalPadding: 7
 
                 bgColor: Hyprland.focusedWorkspace.id === (index + 1)
-                    ? Theme.primary
-                    : Theme.surface
+                    ? Colors.tertiary
+                    : Colors.primary_container
 
                 icon: ""
                 text: index + 1
 
                 textColor: Hyprland.focusedWorkspace.id === (index + 1)
-                    ? Theme.background
-                    : Theme.foreground
+                    ? Colors.on_tertiary
+                    : Colors.on_primary_container
 
                 hoverEnabled: !(Hyprland.focusedWorkspace.id === (index + 1))
                 tapHandler.onTapped: Hyprland.dispatch(

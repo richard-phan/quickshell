@@ -2,8 +2,8 @@ import QtQuick
 import Quickshell.Services.Notifications
 
 Widget {
-    bgColor: Theme.surface
+    bgColor: Colors.primary_container
     icon: ""
     text: "00"
-    textColor: Theme.foreground
+    textColor: Colors.on_primary_container
 }

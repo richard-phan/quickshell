@@ -36,7 +36,7 @@ AnimatedPopup {
           height: 200
           radius: width / 2
 
-          color: Theme.elevated
+          color: Colors.on_primary_container
 
           MouseArea {
             id: volumeMouseArea
@@ -76,7 +76,7 @@ AnimatedPopup {
 
           y: ((100 - Audio.volume) / 100) * 200
 
-          color: Audio.muted ? Theme.foreground : Theme.primary
+          color: Audio.muted ? Colors.secondary : Colors.primary_container
         }
       }
 
@@ -90,14 +90,14 @@ AnimatedPopup {
           width: 20
           height: 20
           radius: 4
-          color: Audio.muted ? Theme.red : Theme.red
+          color: Audio.muted ? Colors.red : Colors.red
 
           anchors.centerIn: parent
         }
 
         Text {
           text: Audio.muted ? "" : ""
-          color: Theme.background
+          color: Colors.background
 
           anchors.centerIn: parent
         }

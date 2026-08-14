@@ -2,10 +2,10 @@ import QtQuick
 import Quickshell.Networking
 
 Widget {
-  bgColor: Theme.surface
+  bgColor: Colors.primary_container
   icon: iconForNetworkState(NetworkState.state)
   text: NetworkState.name
-  textColor: Theme.foreground
+  textColor: Colors.on_primary_container
 
   tapHandler.onTapped: WindowStates.networkVisible = !WindowStates.networkVisible
 

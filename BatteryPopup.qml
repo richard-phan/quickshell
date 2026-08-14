@@ -24,13 +24,13 @@ AnimatedPopup {
 
     Text {
       text: "Battery: " + BatteryService.powerMode
-      color: Theme.foreground
+      color: Colors.on_primary
       font.bold: true
     }
 
     Text {
       text: "Power profile: " + BatteryService.powerProfile
-      color: Theme.foreground
+      color: Colors.on_primary
       font.bold: true
     }
 
@@ -42,7 +42,7 @@ AnimatedPopup {
         width: row.width
         height: row.height
         radius: height / 2
-        color: Theme.elevated
+        color: Colors.on_primary_container
       }
       Row {
         id: row
@@ -74,13 +74,13 @@ AnimatedPopup {
             property bool selected: model.text === BatteryService.powerProfile
             property bool hovered: powerModeHover.containsMouse
 
-            color: selected ? Theme.primary : hovered ? Qt.lighter(Theme.elevated, 1.3) : Theme.elevated
+            color: selected ? Colors.tertiary : hovered ? Qt.lighter(Colors.tertiary, 1.3) : Colors.on_surface
 
             Text {
               anchors.centerIn: parent
               text: model.icon
               font.pointSize: 14
-              color: powerModeSelection.selected ? Theme.background : Theme.foreground
+              color: powerModeSelection.selected ? Colors.background : Colors.on_primary
             }
 
             MouseArea {

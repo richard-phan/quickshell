@@ -16,7 +16,7 @@ Item {
         width: parent.searchBoxWidth
         height: parent.searchBoxHeight
 
-        color: Theme.elevated
+        color: Colors.elevated
         radius: height
     }
 
@@ -26,10 +26,10 @@ Item {
 
         anchors.horizontalCenter: parent.horizontalCenter
 
-        color: Theme.foreground
+        color: Colors.foreground
         font.pointSize: 18
         placeholderText: "Search"
-        placeholderTextColor: Theme.mutedForeground
+        placeholderTextColor: Colors.mutedForeground
 
         Component.onCompleted: forceActiveFocus()
         

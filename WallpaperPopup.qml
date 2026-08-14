@@ -87,7 +87,7 @@ AnimatedPopup {
           height: 168
 
           border.width: 4
-          border.color: index == 2 ? Theme.primary : "transparent"
+          border.color: index == 2 ? Colors.primary : "transparent"
           radius: 5
 
           color: "transparent"

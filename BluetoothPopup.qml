@@ -31,7 +31,7 @@ AnimatedPopup {
 
       Text {
         text: "Bluetooth"
-        color: Theme.foreground
+        color: Colors.on_primary
         font.bold: true
       }
 
@@ -45,10 +45,10 @@ AnimatedPopup {
 
         radius: 4
 
-        color: hoverHandler.hovered ? Theme.surface : "transparent"
+        color: hoverHandler.hovered ? Colors.inverse_primary : "transparent"
 
         btnText: ""
-        btnTextColor: Theme.foreground
+        btnTextColor: hoverHandler.hovered ? Colors.on_primary_container : Colors.on_primary
       }
 
       BackgroundButton {
@@ -57,7 +57,7 @@ AnimatedPopup {
 
         radius: 4
 
-        color: BluetoothStates.enabled ? Theme.green : Theme.red
+        color: BluetoothStates.enabled ? Colors.green : Colors.red
 
         btnText: BluetoothStates.enabled ? "" : ""
 
@@ -78,7 +78,7 @@ AnimatedPopup {
           id: deviceRow
           width: parent.width
           implicitHeight: row.implicitHeight + 20
-          color: Theme.elevated
+          color: Colors.primary_container
           radius: 10
 
           RowLayout {
@@ -95,7 +95,7 @@ AnimatedPopup {
                 anchors.fill: parent
                 radius: 4
 
-                color: Theme.surface
+                color: Colors.on_primary_container
               }
 
               IconImage {
@@ -108,13 +108,13 @@ AnimatedPopup {
             ColumnLayout {
               Text {
                 text: modelData.name
-                color: Theme.foreground
+                color: Colors.on_primary_container
                 font.bold: true
               }
 
               Text {
                 text: modelData.connected ? "Connected" : "Paired"
-                color: Theme.mutedForeground
+                color: Colors.primary
                 font.bold: true
               }
             }
@@ -125,7 +125,7 @@ AnimatedPopup {
 
             Text {
               text: modelData.batteryAvailable ? modelData.battery * 100 + "%" : ""
-              color: Theme.foreground
+              color: Colors.on_primary_container
               font.bold: true
             }
 
@@ -138,28 +138,20 @@ AnimatedPopup {
                 height: 40
                 topLeftRadius: 4
                 bottomLeftRadius: 4
-                color: Theme.blue
+                color: Colors.on_primary_container
 
                 Text {
                   id: connectionIcon
                   text: modelData.connected ? "" : ""
                   anchors.centerIn: parent
                   font.pointSize: 16
-                  color: Theme.background
+                  color: Colors.primary_container
                 }
 
                 MouseArea {
                   id: hoverAreaConnect
                   anchors.fill: parent
                   hoverEnabled: true
-
-                  onContainsMouseChanged: {
-                    if (hoverAreaConnect.containsMouse) {
-                      connectionBox.color = Qt.lighter(parent.color, 1.2);
-                    } else {
-                      connectionBox.color = Theme.blue;
-                    }
-                  }
 
                   onClicked: {
                     modelData.connected = !modelData.connected;
@@ -173,7 +165,7 @@ AnimatedPopup {
                 height: 40
                 topRightRadius: 4
                 bottomRightRadius: 4
-                color: Theme.red
+                color: Colors.red
 
                 Text {
                   text: ""
@@ -190,7 +182,7 @@ AnimatedPopup {
                     if (hoverAreaForget.containsMouse) {
                       forgetBox.color = Qt.lighter(parent.color, 1.3);
                     } else {
-                      forgetBox.color = Theme.red;
+                      forgetBox.color = Colors.red;
                     }
                   }
 

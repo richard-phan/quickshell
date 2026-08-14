@@ -26,7 +26,7 @@ AnimatedPopup {
       width: 150
       height: 150
       radius: 20
-      color: Theme.elevated
+      color: Colors.on_surface_variant
 
       Image {
         id: albumArt
@@ -58,7 +58,7 @@ AnimatedPopup {
           font.bold: true
           elide: Text.ElideRight
 
-          color: Theme.foreground
+          color: Colors.on_primary
         }
 
         Text {
@@ -67,7 +67,7 @@ AnimatedPopup {
           width: parent.width
 
           text: MediaService.activePlayer.trackArtist
-          color: Theme.foreground
+          color: Colors.on_primary
           font.pointSize: 9
           elide: Text.ElideRight
         }
@@ -78,7 +78,7 @@ AnimatedPopup {
           width: parent.width
 
           text: MediaService.activePlayer.trackAlbum
-          color: Theme.foreground
+          color: Colors.on_primary
           font.pointSize: 9
           elide: Text.ElideRight
         }
@@ -99,7 +99,7 @@ AnimatedPopup {
 
             anchors.fill: parent
             radius: height / 2
-            color: Theme.elevated
+            color: Colors.primary_container
           }
 
           Rectangle {
@@ -107,7 +107,7 @@ AnimatedPopup {
             width: MediaService.durationPercent * progressBarMax.width
             height: parent.height
             radius: height / 2
-            color: Theme.primary
+            color: Colors.on_primary_container
           }
         }
 
@@ -117,7 +117,7 @@ AnimatedPopup {
 
           Text {
             text: MediaService.position
-            color: Theme.foreground
+            color: Colors.on_primary
             Layout.alignment: Qt.AlignLeft
           }
 
@@ -127,7 +127,7 @@ AnimatedPopup {
 
           Text {
             text: MediaService.duration
-            color: Theme.foreground
+            color: Colors.on_primary
             Layout.alignment: Qt.AlignRight
           }
         }
@@ -148,7 +148,7 @@ AnimatedPopup {
 
           icon.text: ""
           icon.font.pointSize: 20
-          icon.color: Theme.foreground
+          icon.color: Colors.on_primary
 
           tapHandler.onTapped: MediaService.activePlayer.previous()
         }
@@ -160,7 +160,7 @@ AnimatedPopup {
 
           icon.text: MediaService.isPlaying ? "" : ""
           icon.font.pointSize: 20
-          icon.color: Theme.foreground
+          icon.color: Colors.on_primary
 
           tapHandler.onTapped: MediaService.activePlayer.togglePlaying()
         }
@@ -172,7 +172,7 @@ AnimatedPopup {
 
           icon.text: ""
           icon.font.pointSize: 20
-          icon.color: Theme.foreground
+          icon.color: Colors.on_primary
 
           tapHandler.onTapped: MediaService.activePlayer.next()
         }

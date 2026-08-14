@@ -5,7 +5,7 @@ Rectangle {
   id: background
   implicitWidth: content.implicitWidth + (2 * horizontalPadding)
   implicitHeight: content.implicitHeight
-  color: hoverHandler.hovered && hoverEnabled ? Theme.elevated : bgColor
+  color: hoverHandler.hovered && hoverEnabled ? Colors.inverse_primary : bgColor
   radius: 4
 
   property int minWidth: 5
