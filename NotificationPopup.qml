@@ -5,7 +5,7 @@ import Quickshell
 AnimatedPopup {
   id: root
 
-  isWindowVisible: WindowStates.notificationVisible
+  isWindowVisible: !WindowStates.notificationVisible
 
   notchLeft: true
   notchRight: true
@@ -20,7 +20,9 @@ AnimatedPopup {
 
     width: 300
 
-    anchors.centerIn: parent
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    anchors.topMargin: 20
 
     spacing: 15
 
@@ -82,6 +84,13 @@ AnimatedPopup {
 
           readonly property string appName: modelData
 
+          Behavior on height {
+            NumberAnimation {
+              duration: 100
+              easing.type: Easing.Linear
+            }
+          }
+
           NotificationEntry {
             entryWidth: contentLayout.width
             entryHeight: 35
@@ -104,6 +113,13 @@ AnimatedPopup {
             delegate: NotificationEntry {
               entryWidth: contentLayout.width
               entryHeight: 50
+
+              Behavior on height {
+                NumberAnimation {
+                  duration: 100
+                  easing.type: Easing.Linear
+                }
+              }
 
               bottomLeftRadius: {
                 const count = NotificationService.notificationsByApp.get(appName).length;

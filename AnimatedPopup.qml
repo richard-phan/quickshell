@@ -9,11 +9,11 @@ PanelWindow {
   visible: animationTimer.running || isWindowVisible
 
   implicitWidth: mainContent.implicitWidth + (notchWidth * 2)
-  implicitHeight: mainContent.implicitHeight
+  implicitHeight: 400
 
   margins.top: 30
 
-  color: "transparent"
+  color: "red"
 
   property bool isWindowVisible
 
@@ -76,13 +76,29 @@ PanelWindow {
 
     color: root.windowColor
 
+    opacity: root.isWindowVisible ? 1 : 0
+
     x: root.notchLeft ? root.notchWidth : 0
     y: root.isWindowVisible ? 0 : -height
     clip: true
 
+    Behavior on opacity {
+      NumberAnimation {
+        duration: 600
+        easing.type: Easing.OutCubic
+      }
+    }
+
     Behavior on y {
       NumberAnimation {
         duration: 300
+        easing.type: Easing.OutCubic
+      }
+    }
+
+    Behavior on implicitHeight {
+      NumberAnimation {
+        duration: 50
         easing.type: Easing.OutQuart
       }
     }
