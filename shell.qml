@@ -24,6 +24,8 @@ Scope {
         WindowStates.wallpaperVisible = false;
       if (WindowStates.networkVisible)
         WindowStates.networkVisible = false;
+      if (WindowStates.notificationVisible)
+        WindowStates.notificationVisible = false;
     }
   }
 
@@ -59,4 +61,6 @@ Scope {
   BatteryPopup {}
 
   VolumePopup {}
+
+  NotificationPopup {}
 }
