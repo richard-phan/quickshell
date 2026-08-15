@@ -25,6 +25,8 @@ PanelWindow {
 
   property color windowColor: Colors.primary
 
+  readonly property Item content: mainContent.children.length > 0 ? mainContent.children[0] : null
+
   default property alias windowContent: mainContent.data
 
   mask: Region {
@@ -66,15 +68,15 @@ PanelWindow {
 
     property real padding: 40
 
-    implicitWidth: childrenRect.width + padding
-    implicitHeight: childrenRect.height + padding
+    implicitWidth: content.width + padding
+    implicitHeight: content.height + padding
 
     bottomLeftRadius: 20
     bottomRightRadius: 20
 
     color: root.windowColor
 
-    x: notch.width
+    x: root.notchLeft ? root.notchWidth : 0
     y: root.isWindowVisible ? 0 : -height
     clip: true
 
