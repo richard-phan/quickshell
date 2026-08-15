@@ -13,23 +13,27 @@ Rectangle {
   property real entryHeight
   property color entryColor
 
-  property string notificationTitle
   property string notificationDesc
+  property real notificationPadding
   property TapHandler closeBtnTapHandler: closeButton.tapHandler
+  property bool expanded: false
 
   Column {
+    id: contentLayout
+
     anchors.centerIn: parent
-    width: entryWidth - 25
+    width: entryWidth - notificationPadding
 
     spacing: 3
 
     RowLayout {
-      width: parent.width
+      width: contentLayout.width
 
       Text {
-        text: root.notificationTitle
-        font.pointSize: 11
-        font.bold: true
+        id: notificationContent
+        Layout.fillWidth: true
+        text: root.notificationDesc
+        font.pointSize: 9
         elide: Text.ElideRight
         color: "black"
       }
@@ -38,24 +42,52 @@ Rectangle {
         Layout.fillWidth: true
       }
 
-      BackgroundButton {
-        id: closeButton
+      RowLayout {
+        Layout.alignment: Qt.AlignRight | Qt.AlignTop
+        Text {
+          id: expandedIcon
+          text: {
+            if (notificationContent.truncated)
+              return "";
+            else if (root.expanded)
+              return "";
+          }
+        }
 
-        btnWidth: 20
-        btnHeight: 20
-        radius: 4
+        BackgroundButton {
+          id: closeButton
 
-        btnText: "X"
-        // FIX: change this to be a property
-        btnTextColor: "black"
+          btnWidth: 20
+          btnHeight: 20
+          radius: 4
+
+          btnText: "X"
+          // FIX: change this to be a property
+          btnTextColor: "black"
+        }
       }
     }
+  }
 
-    Text {
-      text: root.notificationDesc
-      font.pointSize: 9
-      elide: Text.ElideRight
-      color: "black"
+  TapHandler {
+    id: notificationTapHandler
+
+    property bool expandable: notificationContent.truncated || root.expanded == true
+
+    onTapped: {
+      if (!expandable)
+        return;
+      root.expanded = !root.expanded;
+
+      if (root.expanded) {
+        notificationContent.wrapMode = Text.Wrap;
+
+        root.height = Math.max(root.entryHeight, notificationContent.implicitHeight + root.notificationPadding);
+      } else {
+        notificationContent.wrapMode = false;
+
+        root.height = root.entryHeight;
+      }
     }
   }
 }

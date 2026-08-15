@@ -18,7 +18,7 @@ AnimatedPopup {
   ColumnLayout {
     id: contentLayout
 
-    width: 250
+    width: 300
 
     anchors.centerIn: parent
 
@@ -54,7 +54,7 @@ AnimatedPopup {
 
     ColumnLayout {
       id: notifications
-      width: 250
+      width: contentLayout.width
       spacing: 10
 
       Rectangle {
@@ -78,17 +78,20 @@ AnimatedPopup {
         model: [...NotificationService.notificationsByApp.keys()]
 
         delegate: Column {
-          spacing: 0
+          spacing: 2
+
+          readonly property string appName: modelData
 
           NotificationEntry {
-            entryWidth: 250
-            entryHeight: 50
+            entryWidth: contentLayout.width
+            entryHeight: 35
             topLeftRadius: 10
             topRightRadius: 10
 
             entryColor: Colors.on_primary_container
 
-            notificationDesc: modelData
+            notificationDesc: appName
+            notificationPadding: 25
 
             closeBtnTapHandler.onTapped: NotificationService.removeAppNotifications(modelData)
           }
@@ -99,11 +102,23 @@ AnimatedPopup {
             model: NotificationService.notificationsByApp.get(modelData)
 
             delegate: NotificationEntry {
-              entryWidth: 250
+              entryWidth: contentLayout.width
               entryHeight: 50
+
+              bottomLeftRadius: {
+                const count = NotificationService.notificationsByApp.get(appName).length;
+                return index == count - 1 ? 10 : 0;
+              }
+
+              bottomRightRadius: {
+                const count = NotificationService.notificationsByApp.get(appName).length;
+                return index == count - 1 ? 10 : 0;
+              }
+
               entryColor: Colors.on_primary_container
 
               notificationDesc: modelData.summary
+              notificationPadding: 25
 
               closeBtnTapHandler.onTapped: NotificationService.removeNotification(modelData, index)
             }

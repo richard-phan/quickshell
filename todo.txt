@@ -1,7 +1,7 @@
-Search
+- [ ] Search
     - [X] search for applications
 
-Media
+- [ ] Media
     - [X] show currently playing song
     - [X] album art
     - [X] track
@@ -11,18 +11,18 @@ Media
     - [X] play/pause
     - [ ] seek
 
-Wallpaper Changer
+- [ ] Wallpaper Changer
     - [ ] organize list
 
-Dashboard
+- [ ] Dashboard
     - [ ] System
     - [ ] Weather
     - [ ] Power
 
-Lockscreen
+- [ ] Lockscreen
     - [ ] Lockscreen
 
-Bluetooth
+- [ ] Bluetooth
     - [ ] Connect
     - [ ] Disconnect
     - [ ] Trust
@@ -30,7 +30,7 @@ Bluetooth
     - [ ] Scan
     - [ ] Toggle
 
-Network
+- [ ] Network
     - [ ] Scan
     - [ ] Show networks
     - [ ] Show connected network
@@ -52,7 +52,8 @@ Network
     - [X] show battery percentage
     - [X] change power mode
 
-Notifications
-    - [ ] view number count
-    - [ ] view notifications
-    - [ ] dismiss notifications
+- [ ] Notifications
+    - [X] view number count
+    - [X] view notifications
+    - [X] dismiss notifications
+    - [ ] notification popup

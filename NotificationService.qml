@@ -41,9 +41,6 @@ QtObject {
     notificationsByApp.get(app).unshift(notification);
 
     notificationsByApp = new Map(notificationsByApp);
-
-    console.log([...notificationsByApp.keys()]);
-    console.log(notificationsByApp.get(app).length);
   }
 
   function removeNotification(notification, index) {
