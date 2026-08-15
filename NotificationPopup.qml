@@ -5,7 +5,7 @@ import Quickshell
 AnimatedPopup {
   id: root
 
-  isWindowVisible: !WindowStates.notificationVisible
+  isWindowVisible: WindowStates.notificationVisible
 
   notchLeft: true
   notchRight: true
@@ -56,6 +56,22 @@ AnimatedPopup {
       id: notifications
       width: 250
       spacing: 10
+
+      Rectangle {
+        width: parent.width
+        height: 50
+        color: Colors.on_primary_container
+        radius: 10
+
+        visible: NotificationService.count == 0
+
+        Text {
+          text: "No notifications"
+          color: "black"
+          anchors.centerIn: parent
+          font.bold: true
+        }
+      }
 
       Repeater {
         id: notificationApp
