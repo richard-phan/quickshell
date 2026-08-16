@@ -9,13 +9,17 @@ PanelWindow {
   visible: animationTimer.running || isWindowVisible
 
   implicitWidth: mainContent.implicitWidth + (notchWidth * 2)
-  implicitHeight: 400
+  implicitHeight: expectedMaxHeight
 
   margins.top: 30
 
   color: "red"
 
   property bool isWindowVisible
+
+  // BUG: need to update these to preffered heights to prevent flickering on initial boot or resizes
+  // all resizing windows need to be extended with a max height
+  property real expectedMaxHeight: mainContent.implicitHeight
 
   property real notchWidth: 20
   property real notchHeight: 20

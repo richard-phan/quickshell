@@ -10,7 +10,7 @@ if [ "$#" -ne 1 ]; then
 fi
 
 for i in $(seq 1 "$COUNT"); do
-    notify-send "Test asdkfjlasdjfklasjdfalksdjfljasldjfalksdjfljasdlfjalsdjflkajsdflasjdflasdjflkajsdflj $i" "This is a test notification" --app-name "Discord"
+    notify-send "Test asdkfjlasdjfklasjd falksdjfljasldjfalksdjf lljasdlfjalsdjflkajsdf lasjdflasdjflkajsdflj $i" "This is a test notification" --app-name "Discord"
     notify-send "Test $i" "This is a test notification" --app-name "Firefox"
     notify-send "Test $i" "This is a test notification" --app-name "League"
 done

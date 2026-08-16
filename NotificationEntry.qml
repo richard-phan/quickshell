@@ -18,23 +18,34 @@ Rectangle {
   property TapHandler closeBtnTapHandler: closeButton.tapHandler
   property bool expanded: false
 
-  Column {
+  Behavior on height {
+    NumberAnimation {
+      duration: 100
+      easing.type: Easing.Linear
+    }
+  }
+
+  ColumnLayout {
     id: contentLayout
 
+    width: entryWidth - root.notificationPadding
+
     anchors.centerIn: parent
-    width: entryWidth - notificationPadding
 
     spacing: 3
 
     RowLayout {
-      width: contentLayout.width
+
+      width: contentLayout.width - root.notificationPadding
 
       Text {
         id: notificationContent
         Layout.fillWidth: true
+
         text: root.notificationDesc
         font.pointSize: 9
         elide: Text.ElideRight
+
         color: "black"
       }
 
@@ -43,7 +54,7 @@ Rectangle {
       }
 
       RowLayout {
-        Layout.alignment: Qt.AlignRight | Qt.AlignTop
+
         Text {
           id: expandedIcon
           text: {
