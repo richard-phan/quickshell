@@ -15,6 +15,20 @@ Rectangle {
   property alias hoverHandler: internalHoverHandler
   property alias tapHandler: internalTapHandler
 
+  Behavior on color {
+    ColorAnimation {
+      duration: 200
+      easing.type: Easing.Linear
+    }
+  }
+
+  Behavior on btnTextColor {
+    ColorAnimation {
+      duration: 200
+      easing.type: Easing.Linear
+    }
+  }
+
   Text {
     id: icon
 
