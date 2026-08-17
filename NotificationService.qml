@@ -59,7 +59,6 @@ QtObject {
   }
 
   function removeAppNotifications(appName) {
-    console.log('Removing ' + appName);
     for (const n of notificationsByApp.get(appName)) {
       n.tracked = false;
     }

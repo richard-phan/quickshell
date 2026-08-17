@@ -114,23 +114,17 @@ AnimatedPopup {
             readonly property string appName: modelData
             property bool collapsed: false
 
-            Behavior on height {
-              NumberAnimation {
-                duration: 100
-                easing.type: Easing.Linear
-              }
-            }
-
             NotificationEntry {
               entryWidth: contentLayout.width
               entryHeight: 35
+
               topLeftRadius: 10
               topRightRadius: 10
 
               entryColor: Colors.on_primary_container
 
               notificationDesc: appName
-              notificationPadding: 5
+              notificationPadding: 25
 
               onCloseDelayTriggered: NotificationService.removeAppNotifications(modelData)
             }
