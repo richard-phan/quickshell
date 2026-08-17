@@ -26,6 +26,8 @@ Scope {
         WindowStates.networkVisible = false;
       if (WindowStates.notificationVisible)
         WindowStates.notificationVisible = false;
+      if (WindowStates.powerVisible)
+        WindowStates.powerVisible = false;
     }
   }
 
@@ -63,4 +65,6 @@ Scope {
   VolumePopup {}
 
   NotificationPopup {}
+
+  PowerPopup {}
 }

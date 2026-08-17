@@ -59,6 +59,8 @@ Scope {
         BatteryWidget {}
         
         NotificationWidget {}
+
+        PowerWidget {}
       }
     }
   }
