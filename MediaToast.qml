@@ -17,9 +17,11 @@ AnimatedPopup {
     target: MediaService
 
     function onSpotifyTrackChanged() {
-      WindowStates.mediaToastVisible = true;
-      hideDelay.running = true;
-      hideDelay.restart();
+      if (!WindowStates.mediaVisible) {
+        WindowStates.mediaToastVisible = true;
+        hideDelay.running = true;
+        hideDelay.restart();
+      }
     }
   }
 
