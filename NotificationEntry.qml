@@ -22,9 +22,17 @@ Rectangle {
   Behavior on height {
     NumberAnimation {
       duration: 100
-      easing.type: Easing.Linear
+      easing.type: Easing.OutCubic
     }
   }
+
+  Behavior on opacity {
+    NumberAnimation {
+      duration: 75
+      easing.type: Easing.OutCubic
+    }
+  }
+
 
   ColumnLayout {
     id: contentLayout
@@ -73,12 +81,13 @@ Rectangle {
           btnHeight: 20
           radius: 4
 
-          btnText: "X"
+          btnText: ""
           // FIX: change this to be a property
           btnTextColor: "black"
 
           tapHandler.onTapped: {
             root.height = 0
+            root.opacity = 0
             closeDelay.running =  true
           }
         }
