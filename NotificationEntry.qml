@@ -15,8 +15,9 @@ Rectangle {
 
   property string notificationDesc
   property real notificationPadding
-  property TapHandler closeBtnTapHandler: closeButton.tapHandler
   property bool expanded: false
+
+  signal closeDelayTriggered()
 
   Behavior on height {
     NumberAnimation {
@@ -75,6 +76,11 @@ Rectangle {
           btnText: "X"
           // FIX: change this to be a property
           btnTextColor: "black"
+
+          tapHandler.onTapped: {
+            root.height = 0
+            closeDelay.running =  true
+          }
         }
       }
     }
@@ -100,5 +106,14 @@ Rectangle {
         root.height = root.entryHeight;
       }
     }
+  }
+
+  Timer {
+    id: closeDelay
+
+    running: false
+    interval: 100
+
+    onTriggered: root.onCloseDelayTriggered()
   }
 }

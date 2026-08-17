@@ -132,13 +132,13 @@ AnimatedPopup {
               notificationDesc: appName
               notificationPadding: 5
 
-              closeBtnTapHandler.onTapped: NotificationService.removeAppNotifications(modelData)
+              onCloseDelayTriggered: NotificationService.removeAppNotifications(modelData)
             }
 
             Repeater {
               id: notificationAppContent
 
-              model: NotificationService.notificationsByApp.get(modelData)
+              model: NotificationService.notificationsByApp.get(appName)
 
               delegate: NotificationEntry {
                 entryWidth: contentLayout.width
@@ -161,7 +161,7 @@ AnimatedPopup {
                 notificationDesc: modelData.summary
                 notificationPadding: 25
 
-                closeBtnTapHandler.onTapped: NotificationService.removeNotification(modelData, index)
+                onCloseDelayTriggered: NotificationService.removeNotification(modelData, index)
               }
             }
           }

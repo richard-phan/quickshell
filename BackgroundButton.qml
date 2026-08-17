@@ -17,6 +17,7 @@ Rectangle {
 
   Text {
     id: icon
+
     text: btnText
     color: btnTextColor
     font.pointSize: btnTextPointSize
@@ -26,6 +27,7 @@ Rectangle {
 
   HoverHandler {
     id: internalHoverHandler
+
     enabled: true
     cursorShape: Qt.PointingHandCursor
     target: parent
@@ -33,5 +35,7 @@ Rectangle {
 
   TapHandler {
     id: internalTapHandler
+
+    gesturePolicy: TapHandler.WithinBounds
   }
 }
