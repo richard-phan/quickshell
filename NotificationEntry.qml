@@ -15,26 +15,46 @@ Rectangle {
 
   property string notificationDesc
   property real notificationPadding
-  property TapHandler closeBtnTapHandler: closeButton.tapHandler
   property bool expanded: false
 
-  Column {
+  signal closeDelayTriggered()
+
+  Behavior on height {
+    NumberAnimation {
+      duration: 100
+      easing.type: Easing.OutCubic
+    }
+  }
+
+  Behavior on opacity {
+    NumberAnimation {
+      duration: 50
+      easing.type: Easing.OutCubic
+    }
+  }
+
+
+  ColumnLayout {
     id: contentLayout
 
+    width: entryWidth - root.notificationPadding
+
     anchors.centerIn: parent
-    width: entryWidth - notificationPadding
 
     spacing: 3
 
     RowLayout {
-      width: contentLayout.width
+
+      width: contentLayout.width - root.notificationPadding
 
       Text {
         id: notificationContent
         Layout.fillWidth: true
+
         text: root.notificationDesc
         font.pointSize: 9
         elide: Text.ElideRight
+
         color: "black"
       }
 
@@ -43,7 +63,7 @@ Rectangle {
       }
 
       RowLayout {
-        Layout.alignment: Qt.AlignRight | Qt.AlignTop
+
         Text {
           id: expandedIcon
           text: {
@@ -61,9 +81,15 @@ Rectangle {
           btnHeight: 20
           radius: 4
 
-          btnText: "X"
+          btnText: ""
           // FIX: change this to be a property
           btnTextColor: "black"
+
+          tapHandler.onTapped: {
+            root.height = 0
+            root.opacity = 0
+            closeDelay.running =  true
+          }
         }
       }
     }
@@ -89,5 +115,14 @@ Rectangle {
         root.height = root.entryHeight;
       }
     }
+  }
+
+  Timer {
+    id: closeDelay
+
+    running: false
+    interval: 100
+
+    onTriggered: root.onCloseDelayTriggered()
   }
 }

@@ -9,13 +9,17 @@ PanelWindow {
   visible: animationTimer.running || isWindowVisible
 
   implicitWidth: mainContent.implicitWidth + (notchWidth * 2)
-  implicitHeight: mainContent.implicitHeight
+  implicitHeight: expectedMaxHeight
 
   margins.top: 30
 
-  color: "transparent"
+  color: "red"
 
   property bool isWindowVisible
+
+  // BUG: need to update these to preffered heights to prevent flickering on initial boot or resizes
+  // all resizing windows need to be extended with a max height
+  property real expectedMaxHeight: mainContent.implicitHeight
 
   property real notchWidth: 20
   property real notchHeight: 20
@@ -24,6 +28,8 @@ PanelWindow {
   property bool notchRight
 
   property color windowColor: Colors.primary
+
+  readonly property Item content: mainContent.children.length > 0 ? mainContent.children[0] : null
 
   default property alias windowContent: mainContent.data
 
@@ -66,21 +72,37 @@ PanelWindow {
 
     property real padding: 40
 
-    implicitWidth: childrenRect.width + padding
-    implicitHeight: childrenRect.height + padding
+    implicitWidth: content.width + padding
+    implicitHeight: content.height + padding
 
     bottomLeftRadius: 20
     bottomRightRadius: 20
 
     color: root.windowColor
 
-    x: notch.width
+    opacity: root.isWindowVisible ? 1 : 0
+
+    x: root.notchLeft ? root.notchWidth : 0
     y: root.isWindowVisible ? 0 : -height
     clip: true
+
+    Behavior on opacity {
+      NumberAnimation {
+        duration: 600
+        easing.type: Easing.OutCubic
+      }
+    }
 
     Behavior on y {
       NumberAnimation {
         duration: 300
+        easing.type: Easing.OutCubic
+      }
+    }
+
+    Behavior on implicitHeight {
+      NumberAnimation {
+        duration: 50
         easing.type: Easing.OutQuart
       }
     }

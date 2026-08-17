@@ -1,4 +1,5 @@
 import QtQuick
+import QtQuick.Controls
 import QtQuick.Layouts
 import Quickshell
 
@@ -6,6 +7,8 @@ AnimatedPopup {
   id: root
 
   isWindowVisible: WindowStates.notificationVisible
+
+  expectedMaxHeight: 380
 
   notchLeft: true
   notchRight: true
@@ -20,7 +23,9 @@ AnimatedPopup {
 
     width: 300
 
-    anchors.centerIn: parent
+    anchors.horizontalCenter: parent.horizontalCenter
+    anchors.top: parent.top
+    anchors.topMargin: 20
 
     spacing: 15
 
@@ -52,75 +57,106 @@ AnimatedPopup {
       }
     }
 
-    ColumnLayout {
-      id: notifications
-      width: contentLayout.width
-      spacing: 10
+    ScrollView {
+      id: notificationScrollView
 
-      Rectangle {
-        width: parent.width
-        height: 50
-        color: Colors.on_primary_container
-        radius: 10
+      width: parent.width
+      Layout.preferredHeight: notifications.implicitHeight >= 300 ? 300 : notifications.implicitHeight
 
-        visible: NotificationService.count == 0
+      contentWidth: availableWidth
+      contentHeight: notifications.implicitHeight
 
-        Text {
-          text: "No notifications"
-          color: "black"
-          anchors.centerIn: parent
-          font.bold: true
-        }
+      clip: true
+
+      Binding {
+        target: notificationScrollView.contentItem
+        property: "boundsBehavior"
+        value: Flickable.StopAtBounds
       }
 
-      Repeater {
-        id: notificationApp
-        model: [...NotificationService.notificationsByApp.keys()]
+      ColumnLayout {
+        id: notifications
 
-        delegate: Column {
-          spacing: 2
+        width: parent ? parent.width : 300
 
-          readonly property string appName: modelData
+        spacing: 10
 
-          NotificationEntry {
-            entryWidth: contentLayout.width
-            entryHeight: 35
-            topLeftRadius: 10
-            topRightRadius: 10
+        Rectangle {
+          Layout.fillWidth: true
+          Layout.preferredHeight: visible ? 50 : 0
 
-            entryColor: Colors.on_primary_container
+          Layout.alignment: Qt.AlignHCenter
 
-            notificationDesc: appName
-            notificationPadding: 25
+          color: Colors.on_primary_container
+          radius: 10
 
-            closeBtnTapHandler.onTapped: NotificationService.removeAppNotifications(modelData)
+          visible: NotificationService.count == 0
+
+          Text {
+            text: "No notifications"
+            font.bold: true
+
+            color: "black"
+
+            anchors.centerIn: parent
           }
+        }
 
-          Repeater {
-            id: notificationAppContent
+        Repeater {
+          id: notificationApp
 
-            model: NotificationService.notificationsByApp.get(modelData)
+          model: [...NotificationService.notificationsByApp.keys()]
 
-            delegate: NotificationEntry {
+          delegate: Column {
+            width: parent ? parent.width : 0
+            spacing: 2
+
+            readonly property string appName: modelData
+            property bool collapsed: false
+
+            NotificationEntry {
               entryWidth: contentLayout.width
-              entryHeight: 50
+              entryHeight: 35
 
-              bottomLeftRadius: {
-                const count = NotificationService.notificationsByApp.get(appName).length;
-                return index == count - 1 ? 10 : 0;
-              }
-
-              bottomRightRadius: {
-                const count = NotificationService.notificationsByApp.get(appName).length;
-                return index == count - 1 ? 10 : 0;
-              }
+              topLeftRadius: 10
+              topRightRadius: 10
 
               entryColor: Colors.on_primary_container
 
-              notificationDesc: modelData.summary
+              notificationDesc: appName
               notificationPadding: 25
 
-              closeBtnTapHandler.onTapped: NotificationService.removeNotification(modelData, index)
+              onCloseDelayTriggered: NotificationService.removeAppNotifications(modelData)
+            }
+
+            Repeater {
+              id: notificationAppContent
+
+              model: NotificationService.notificationsByApp.get(appName)
+
+              delegate: NotificationEntry {
+                entryWidth: contentLayout.width
+                entryHeight: 50
+
+                visible: notificationApp.collapsed
+
+                bottomLeftRadius: {
+                  const count = NotificationService.notificationsByApp.get(appName).length;
+                  return index == count - 1 ? 10 : 0;
+                }
+
+                bottomRightRadius: {
+                  const count = NotificationService.notificationsByApp.get(appName).length;
+                  return index == count - 1 ? 10 : 0;
+                }
+
+                entryColor: Colors.on_primary_container
+
+                notificationDesc: modelData.summary
+                notificationPadding: 25
+
+                onCloseDelayTriggered: NotificationService.removeNotification(modelData, index)
+              }
             }
           }
         }

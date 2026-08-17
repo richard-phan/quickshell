@@ -57,3 +57,5 @@
     - [X] view notifications
     - [X] dismiss notifications
     - [ ] notification popup
+    - [ ] add collapse for category
+        - container for notifications or just resize all elements at the same time?
