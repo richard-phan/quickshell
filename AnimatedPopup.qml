@@ -13,7 +13,7 @@ PanelWindow {
 
   margins.top: 30
 
-  color: "red"
+  color: "transparent"
 
   property bool isWindowVisible
 
