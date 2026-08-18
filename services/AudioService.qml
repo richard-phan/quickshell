@@ -10,4 +10,16 @@ QtObject {
   property PwObjectTracker tracker: PwObjectTracker {
     objects: [Pipewire.defaultAudioSink]
   }
+
+  function setVolume(vol) {
+    if (audio) {
+      audio.volume = vol;
+    }
+  }
+
+  function setMuted(state) {
+    if (audio) {
+      audio.muted = state;
+    }
+  }
 }
