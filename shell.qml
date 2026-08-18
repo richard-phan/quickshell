@@ -56,10 +56,7 @@ Scope {
 
   LauncherPopup {
     id: appLauncher
-    margins.top: 30
   }
-
-  // SystemPopup {}
 
   MediaPopup {}
 
