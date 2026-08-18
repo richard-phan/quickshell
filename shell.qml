@@ -1,7 +1,22 @@
 import QtQuick
 import Quickshell
 
-import "."
+import qs.modules.audio
+import qs.modules.backdrop
+import qs.modules.battery
+import qs.modules.bar
+import qs.modules.bluetooth
+import qs.modules.dashboard
+import qs.modules.launcher
+import qs.modules.media
+import qs.modules.network
+import qs.modules.notifications
+import qs.modules.power
+import qs.modules.system
+import qs.modules.volume
+import qs.modules.wallpaper
+import qs.modules.window
+import qs.modules.workspace
 
 Scope {
   Backdrop {
@@ -55,8 +70,6 @@ Scope {
   BatteryPopup {}
 
   VolumePopup {}
-
-  RealDashboard {}
 
   NetworkPopup {}
 
