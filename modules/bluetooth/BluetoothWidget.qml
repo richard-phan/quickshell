@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell.Bluetooth
 
+import "../../"
 import "../../components"
 
 // FIX: better way to handle bluetooth service?

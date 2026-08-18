@@ -4,6 +4,7 @@ import Quickshell
 import Quickshell.Bluetooth
 import Quickshell.Widgets
 
+import "../../"
 import "../../components"
 
 AnimatedPopup {

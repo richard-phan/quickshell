@@ -3,6 +3,7 @@ import Quickshell.Io
 import QtQuick
 import QtQuick.Layouts
 
+import "../../"
 import "../../components"
 import "../audio"
 import "../battery"

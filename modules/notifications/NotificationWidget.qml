@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell.Services.Notifications
 
+import "../../"
 import "../../components"
 
 // FIX: Better way to handl enotifications??

@@ -1,13 +1,14 @@
 import QtQuick
 import Quickshell.Services.Pipewire
 
-import "../../services"
+import "../../"
 import "../../components"
+import "../../services"
 
 Widget {
     bgColor: Colors.primary_container
-    icon: iconForVolume(Audio.muted, Audio.volume)
-    text: Audio.volume + "%"
+    icon: iconForVolume(AudioService.muted, AudioService.volume)
+    text: AudioService.volume + "%"
     textColor: Colors.on_primary_container
 
     function iconForVolume(muted, volume) {

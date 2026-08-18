@@ -1,6 +1,10 @@
 import QtQuick
 import QtQuick.Layouts
 
+import "../"
+
+// color shouldnt be here
+
 Rectangle {
   id: background
   implicitWidth: content.implicitWidth + (2 * horizontalPadding)

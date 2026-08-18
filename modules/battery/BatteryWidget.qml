@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell.Services.UPower
 
+import "../../"
 import "../../components"
 
 Widget {

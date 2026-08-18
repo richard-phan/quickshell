@@ -3,6 +3,7 @@ import QtQuick.Layouts
 import Quickshell
 import Quickshell.Io
 
+import "../../"
 import "../../components"
 
 AnimatedPopup {

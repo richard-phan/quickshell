@@ -1,6 +1,7 @@
 import QtQuick
 import Quickshell.Networking
 
+import "../../"
 import "../../components"
 
 Widget {
