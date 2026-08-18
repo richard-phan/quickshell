@@ -33,7 +33,7 @@ Scope {
         
         Media {}
         
-        WindowWidget {}
+        // WindowWidget {}
       }
 
       RowLayout {
