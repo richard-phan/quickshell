@@ -1,6 +1,7 @@
 import QtQuick
 import QtQuick.Layouts
 
+import "."
 import "../../"
 import "../../components"
 
@@ -24,116 +25,44 @@ AnimatedPopup {
 
     spacing: 12
 
-    Column {
-      // FIX: Convert these to single vertical element
+    ColumnLayout {
+      id: speakerColumn
+
       spacing: 10
 
-      Item {
-        width: volumeMax.width
-        height: volumeMax.height
+      VolumeSlider {
+        Layout.preferredWidth: 15
+        Layout.preferredHeight: 200
 
-        Rectangle {
-          id: volumeMax
-          width: 15
-          height: 200
-          radius: width / 2
+        Layout.alignment: Qt.AlignHCenter
 
-          color: Colors.on_primary_container
+        from: 0
+        to: 100
 
-          MouseArea {
-            id: volumeMouseArea
-            anchors.fill: parent
-            hoverEnabled: true
+        bgColor: Colors.on_primary_container
+        progressColor: AudioService.muted ? Colors.inverse_primary : Colors.on_primary
 
-            drag.target: parent
-            drag.axis: y
+        value: AudioService.volume
 
-            onPressed: mouse => {
-              const vol = getVolumePercent(mouse.y);
-              if (vol)
-                AudioService.audio.volume = vol;
-            }
+        orientation: Qt.Vertical
 
-            onPositionChanged: mouse => {
-              if (mouse.buttons & Qt.LeftButton) {
-                const vol = getVolumePercent(mouse.y);
-                if (vol)
-                  AudioService.audio.volume = vol;
-              }
-            }
-
-            function getVolumePercent(y) {
-              const volPercent = (height - y) / height;
-              return volPercent <= 1 && volPercent >= 0 ? volPercent : undefined;
-            }
-          }
-        }
-
-        Rectangle {
-          id: volumePercent
-
-          width: 15
-          height: (AudioService.volume / 100) * 200
-          radius: width / 2
-
-          y: ((100 - AudioService.volume) / 100) * 200
-
-          color: AudioService.muted ? Colors.secondary : Colors.primary_container
-        }
+        onMoved: AudioService.setVolume(value / 100)
       }
 
-      Item {
-        width: muteButton.width
-        height: muteButton.height
-        // FIX: align center
+      BackgroundButton {
+        btnWidth: 25
+        btnHeight: 25
 
-        Rectangle {
-          id: muteButton
-          width: 20
-          height: 20
-          radius: 4
-          color: AudioService.muted ? Colors.red : Colors.red
+        radius: 4
 
-          anchors.centerIn: parent
-        }
+        color: hoverHandler.hovered ? Colors.on_primary : "transparent"
 
-        Text {
-          text: AudioService.muted ? "" : ""
-          color: Colors.background
+        btnText: AudioService.muted ? "" : ""
+        btnTextColor: hoverHandler.hovered ? Colors.primary : Colors.on_primary
 
-          anchors.centerIn: parent
-        }
+        Layout.alignment: Qt.AlignHCenter
 
-        MouseArea {
-          id: muteMouseArea
-          anchors.fill: parent
-          hoverEnabled: true
-
-          onContainsMouseChanged: {
-            if (muteMouseArea.containsMouse) {
-              // TODO add mouse hover
-            }
-          }
-
-          onClicked: {
-            AudioService.audio.muted = !AudioService.audio.muted;
-          }
-        }
-      }
-    }
-
-    Column {
-      spacing: 5
-
-      Rectangle {
-        width: 15
-        height: 200
-        radius: width / 2
-      }
-
-      Text {
-        text: "M"
-        color: "white"
+        tapHandler.onTapped: AudioService.setMuted(!AudioService.muted)
       }
     }
   }
