@@ -37,75 +37,57 @@ AnimatedPopup {
       font.bold: true
     }
 
-    Item {
-      width: parent.width
-      height: row.implicitHeight
+    Row {
+      id: row
 
-      Rectangle {
-        width: row.width
-        height: row.height
-        radius: height / 2
-        color: Colors.on_primary_container
-      }
-      Row {
-        id: row
+      spacing: 10
 
-        spacing: 10
-
-        Repeater {
-          model: ListModel {
-            ListElement {
-              text: "Power Saving"
-              icon: "󰌪"
-            }
-            ListElement {
-              text: "Balanced"
-              icon: ""
-            }
-            ListElement {
-              text: "Performance"
-              icon: "󱓞"
-            }
+      Repeater {
+        model: ListModel {
+          ListElement {
+            text: "Power Saving"
+            icon: "󰌪"
           }
+          ListElement {
+            text: "Balanced"
+            icon: ""
+          }
+          ListElement {
+            text: "Performance"
+            icon: "󱓞"
+          }
+        }
 
-          delegate: Rectangle {
-            id: powerModeSelection
-            width: 45
-            height: 45
-            radius: height / 2
+        delegate: BackgroundButton {
+          btnWidth: 50
+          btnHeight: 50
+          color: selected ? Colors.tertiary : hoverHandler.hovered ? Colors.on_primary_container : Colors.primary_container
 
-            property bool selected: model.text === BatteryService.powerProfile
-            property bool hovered: powerModeHover.containsMouse
+          radius: 25
 
-            color: selected ? Colors.tertiary : hovered ? Qt.lighter(Colors.tertiary, 1.3) : Colors.on_surface
+          property bool selected: model.text === BatteryService.powerProfile
 
-            Text {
-              anchors.centerIn: parent
-              text: model.icon
-              font.pointSize: 14
-              color: powerModeSelection.selected ? Colors.background : Colors.on_primary
+          btnText: model.icon
+          btnTextPointSize: 15
+          btnTextColor: selected ? Colors.on_tertiary : hoverHandler.hovered ? Colors.primary_container : Colors.on_primary_container
+
+          hoverHandler.enabled: !selected
+
+          tapHandler.onTapped: {
+            if (selected) {
+              return;
             }
 
-            MouseArea {
-              id: powerModeHover
-              anchors.fill: parent
-              hoverEnabled: !powerModeSelection.selected
-
-              onClicked: {
-                switch (model.text) {
-                case "Power Saving":
-                  PowerProfiles.profile = PowerProfile.PowerSaver;
-                  break;
-                case "Balanced":
-                  PowerProfiles.profile = PowerProfile.Balanced;
-                  break;
-                case "Performance":
-                  PowerProfiles.profile = PowerProfile.Performance;
-                  break;
-                default:
-                  return;
-                }
-              }
+            switch (model.text) {
+            case "Power Saving":
+              PowerProfiles.profile = PowerProfile.PowerSaver;
+              return;
+            case "Balanced":
+              PowerProfiles.profile = PowerProfile.Balanced;
+              return;
+            case "Performance":
+              PowerProfiles.profile = PowerProfile.Performance;
+              return;
             }
           }
         }
