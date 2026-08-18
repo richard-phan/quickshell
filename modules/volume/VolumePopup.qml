@@ -1,6 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
 
 import "../../"
 import "../../components"
@@ -52,14 +51,14 @@ AnimatedPopup {
             onPressed: mouse => {
               const vol = getVolumePercent(mouse.y);
               if (vol)
-                Audio.audio.volume = vol;
+                AudioService.audio.volume = vol;
             }
 
             onPositionChanged: mouse => {
               if (mouse.buttons & Qt.LeftButton) {
                 const vol = getVolumePercent(mouse.y);
                 if (vol)
-                  Audio.audio.volume = vol;
+                  AudioService.audio.volume = vol;
               }
             }
 
@@ -74,12 +73,12 @@ AnimatedPopup {
           id: volumePercent
 
           width: 15
-          height: (Audio.volume / 100) * 200
+          height: (AudioService.volume / 100) * 200
           radius: width / 2
 
-          y: ((100 - Audio.volume) / 100) * 200
+          y: ((100 - AudioService.volume) / 100) * 200
 
-          color: Audio.muted ? Colors.secondary : Colors.primary_container
+          color: AudioService.muted ? Colors.secondary : Colors.primary_container
         }
       }
 
@@ -93,13 +92,13 @@ AnimatedPopup {
           width: 20
           height: 20
           radius: 4
-          color: Audio.muted ? Colors.red : Colors.red
+          color: AudioService.muted ? Colors.red : Colors.red
 
           anchors.centerIn: parent
         }
 
         Text {
-          text: Audio.muted ? "" : ""
+          text: AudioService.muted ? "" : ""
           color: Colors.background
 
           anchors.centerIn: parent
@@ -117,7 +116,7 @@ AnimatedPopup {
           }
 
           onClicked: {
-            Audio.audio.muted = !Audio.audio.muted;
+            AudioService.audio.muted = !AudioService.audio.muted;
           }
         }
       }

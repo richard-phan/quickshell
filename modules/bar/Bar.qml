@@ -43,11 +43,11 @@ Scope {
         anchors.leftMargin: 5
 
         DashboardWidget {}
-        
+
         WorkspaceWidget {}
-        
+
         MediaWidget {}
-        
+
         // WindowWidget {}
       }
 
@@ -66,13 +66,13 @@ Scope {
         anchors.rightMargin: 5
 
         BluetoothWidget {}
-        
+
         NetworkWidget {}
-        
+
         AudioWidget {}
-        
+
         BatteryWidget {}
-        
+
         NotificationWidget {}
 
         PowerWidget {}

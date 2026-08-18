@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Layouts
 import Quickshell
 
+import "../"
+
 Rectangle {
   width: entryWidth
   height: entryHeight

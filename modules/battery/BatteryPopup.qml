@@ -1,7 +1,5 @@
 import QtQuick
 import QtQuick.Layouts
-import Quickshell
-import Quickshell.Io
 import Quickshell.Services.UPower
 
 import "../../"
@@ -22,7 +20,9 @@ AnimatedPopup {
 
   ColumnLayout {
     id: contentLayout
+
     anchors.centerIn: parent
+
     spacing: 10
 
     Text {
@@ -71,7 +71,7 @@ AnimatedPopup {
           delegate: Rectangle {
             id: powerModeSelection
             width: 45
-            height: width
+            height: 45
             radius: height / 2
 
             property bool selected: model.text === BatteryService.powerProfile

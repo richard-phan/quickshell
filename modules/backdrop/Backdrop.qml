@@ -3,35 +3,35 @@ import Quickshell
 import Quickshell.Wayland
 
 PanelWindow {
-    id: root
+  id: root
 
-    required property bool backdropVisible
-   
-    signal closePopup()
+  required property bool backdropVisible
 
-    visible: backdropVisible
+  signal closePopup
+
+  visible: backdropVisible
+  color: "transparent"
+
+  WlrLayershell.layer: WlrLayer.Top
+  WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+
+  exclusiveZone: -1
+
+  anchors {
+    top: true
+    bottom: true
+    left: true
+    right: true
+  }
+
+  Rectangle {
+    anchors.fill: parent
     color: "transparent"
 
-    WlrLayershell.layer: WlrLayer.Top
-    WlrLayershell.keyboardFocus: WlrKeyboardFocus.None
+    MouseArea {
+      anchors.fill: parent
 
-    exclusiveZone: -1
-
-    anchors {
-        top: true
-        bottom: true
-        left: true
-        right: true
+      onClicked: root.closePopup()
     }
-
-    Rectangle {
-        anchors.fill: parent
-        color: "transparent"
-        
-        MouseArea {
-            anchors.fill: parent
-
-            onClicked: root.closePopup()
-        }
-    }
+  }
 }

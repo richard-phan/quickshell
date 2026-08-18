@@ -1,17 +1,15 @@
+import "../../"
+import "../../components"
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
 import Quickshell.Bluetooth
 import Quickshell.Widgets
 
-import "../../"
-import "../../components"
-
 AnimatedPopup {
   id: root
 
   isWindowVisible: WindowStates.bluetoothVisible
-
   notchLeft: true
   notchRight: true
 
@@ -24,9 +22,7 @@ AnimatedPopup {
     id: contentLayout
 
     width: 300
-
     anchors.centerIn: parent
-
     spacing: 20
 
     RowLayout {
@@ -45,11 +41,8 @@ AnimatedPopup {
       BackgroundButton {
         btnWidth: 30
         btnHeight: 30
-
         radius: 4
-
         color: hoverHandler.hovered ? Colors.inverse_primary : "transparent"
-
         btnText: ""
         btnTextColor: hoverHandler.hovered ? Colors.on_primary_container : Colors.on_primary
       }
@@ -57,13 +50,9 @@ AnimatedPopup {
       BackgroundButton {
         btnWidth: 30
         btnHeight: 30
-
         radius: 4
-
-        color: BluetoothStates.enabled ? Colors.green : Colors.red
-
-        btnText: BluetoothStates.enabled ? "" : ""
-
+        color: BluetoothService.enabled ? Colors.green : Colors.red
+        btnText: BluetoothService.enabled ? "" : ""
         tapHandler.onTapped: Bluetooth.defaultAdapter.enabled = !BluetoothdefaultAdapter.enabled
       }
     }
@@ -75,10 +64,11 @@ AnimatedPopup {
       Repeater {
         id: devices
 
-        model: BluetoothStates.devices
+        model: BluetoothService.devices
 
         delegate: Rectangle {
           id: deviceRow
+
           width: parent.width
           implicitHeight: row.implicitHeight + 20
           color: Colors.primary_container
@@ -86,6 +76,7 @@ AnimatedPopup {
 
           RowLayout {
             id: row
+
             anchors.fill: parent
             anchors.margins: 10
             spacing: 10
@@ -97,7 +88,6 @@ AnimatedPopup {
               Rectangle {
                 anchors.fill: parent
                 radius: 4
-
                 color: Colors.on_primary_container
               }
 
@@ -137,6 +127,7 @@ AnimatedPopup {
 
               Rectangle {
                 id: connectionBox
+
                 width: 40
                 height: 40
                 topLeftRadius: 4
@@ -145,6 +136,7 @@ AnimatedPopup {
 
                 Text {
                   id: connectionIcon
+
                   text: modelData.connected ? "" : ""
                   anchors.centerIn: parent
                   font.pointSize: 16
@@ -153,9 +145,9 @@ AnimatedPopup {
 
                 MouseArea {
                   id: hoverAreaConnect
+
                   anchors.fill: parent
                   hoverEnabled: true
-
                   onClicked: {
                     modelData.connected = !modelData.connected;
                   }
@@ -164,6 +156,7 @@ AnimatedPopup {
 
               Rectangle {
                 id: forgetBox
+
                 width: 40
                 height: 40
                 topRightRadius: 4
@@ -178,17 +171,15 @@ AnimatedPopup {
 
                 MouseArea {
                   id: hoverAreaForget
+
                   anchors.fill: parent
                   hoverEnabled: true
-
                   onContainsMouseChanged: {
-                    if (hoverAreaForget.containsMouse) {
+                    if (hoverAreaForget.containsMouse)
                       forgetBox.color = Qt.lighter(parent.color, 1.3);
-                    } else {
+                    else
                       forgetBox.color = Colors.red;
-                    }
                   }
-
                   onClicked: {
                     console.log("forgetting device");
                     if (modelData.paired)

@@ -17,7 +17,7 @@ Rectangle {
   property real notificationPadding
   property bool expanded: false
 
-  signal closeDelayTriggered()
+  signal closeDelayTriggered
 
   Behavior on height {
     NumberAnimation {
@@ -32,7 +32,6 @@ Rectangle {
       easing.type: Easing.OutCubic
     }
   }
-
 
   ColumnLayout {
     id: contentLayout
@@ -86,9 +85,9 @@ Rectangle {
           btnTextColor: "black"
 
           tapHandler.onTapped: {
-            root.height = 0
-            root.opacity = 0
-            closeDelay.running =  true
+            root.height = 0;
+            root.opacity = 0;
+            closeDelay.running = true;
           }
         }
       }

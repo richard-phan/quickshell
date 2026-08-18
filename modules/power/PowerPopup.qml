@@ -35,12 +35,24 @@ AnimatedPopup {
     anchors.topMargin: 20
 
     spacing: 15
-    
+
     Repeater {
-      model : ListModel {
-        ListElement { icon: ""; pointSize: 15; command: "systemctl suspend"}
-        ListElement { icon: "󰜉"; pointSize: 20; command: "systemctl reboot"}
-        ListElement { icon: "⏻"; pointSize: 28; command: "systemctl poweroff"}
+      model: ListModel {
+        ListElement {
+          icon: ""
+          pointSize: 15
+          command: "systemctl suspend"
+        }
+        ListElement {
+          icon: "󰜉"
+          pointSize: 20
+          command: "systemctl reboot"
+        }
+        ListElement {
+          icon: "⏻"
+          pointSize: 28
+          command: "systemctl poweroff"
+        }
       }
 
       delegate: BackgroundButton {
@@ -55,8 +67,8 @@ AnimatedPopup {
         btnTextPointSize: model.pointSize
 
         tapHandler.onTapped: {
-          powerProcess.command = model.command.split(" ")
-          powerProcess.running = true
+          powerProcess.command = model.command.split(" ");
+          powerProcess.running = true;
         }
       }
     }

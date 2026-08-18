@@ -2,25 +2,25 @@ import QtQuick
 import Quickshell
 
 Rectangle {
-    id: background
+  id: background
 
-    width: btnWidth
-    height: btnHeight
+  width: btnWidth
+  height: btnHeight
 
-    color: btnColor
+  color: btnColor
 
-    property int btnWidth
-    property int btnHeight
-    property string btnColor
-    property alias icon: icon
-    property alias tapHandler: internalTapHandler
+  property int btnWidth
+  property int btnHeight
+  property string btnColor
+  property alias icon: icon
+  property alias tapHandler: internalTapHandler
 
-    Text {
-        id: icon
-        anchors.centerIn: parent
-    }
+  Text {
+    id: icon
+    anchors.centerIn: parent
+  }
 
-    TapHandler {
-        id: internalTapHandler
-    }
+  TapHandler {
+    id: internalTapHandler
+  }
 }
