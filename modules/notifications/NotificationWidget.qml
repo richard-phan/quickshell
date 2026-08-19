@@ -7,10 +7,10 @@ import "../../components"
 // FIX: Better way to handl enotifications??
 
 Widget {
-  bgColor: Colors.primary_container
+  bgColor: Colors.primary
   icon: ""
   text: NotificationService.count ? NotificationService.count + "" : "0"
-  textColor: Colors.on_primary_container
+  textColor: Colors.on_primary
 
   tapHandler.onTapped: WindowStates.notificationVisible = !WindowStates.notificationVisible
 }

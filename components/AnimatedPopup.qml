@@ -29,7 +29,7 @@ PanelWindow {
   property bool notchLeft
   property bool notchRight
 
-  property color windowColor: Colors.primary
+  property color windowColor: Colors.surface_bright
 
   readonly property Item content: mainContent.children.length > 0 ? mainContent.children[0] : null
 

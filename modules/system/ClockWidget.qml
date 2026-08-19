@@ -2,10 +2,10 @@ import "../../"
 import "../../components"
 
 Widget {
-  bgColor: Colors.primary_container
+  bgColor: Colors.primary
   icon: ""
   text: TimeService.time
-  textColor: Colors.on_primary_container
+  textColor: Colors.on_primary
 
   tapHandler.onTapped: WindowStates.mediaVisible = !WindowStates.mediaVisible
 }

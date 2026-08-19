@@ -4,7 +4,8 @@ import "../../"
 import "../../components"
 
 Widget {
-  bgColor: Colors.primary_container
+  bgColor: Colors.primary
+
   icon: {
     switch (BatteryService.powerMode) {
     case "Unknown":
@@ -50,7 +51,7 @@ Widget {
     }
   }
   text: BatteryService.batteryPercentage + "%"
-  textColor: Colors.on_primary_container
+  textColor: Colors.on_primary
 
   MouseArea {
     anchors.fill: parent

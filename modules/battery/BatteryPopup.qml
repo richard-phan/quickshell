@@ -27,13 +27,13 @@ AnimatedPopup {
 
     Text {
       text: "Battery: " + BatteryService.powerMode
-      color: Colors.on_primary
+      color: Colors.on_surface
       font.bold: true
     }
 
     Text {
       text: "Power profile: " + BatteryService.powerProfile
-      color: Colors.on_primary
+      color: Colors.on_surface
       font.bold: true
     }
 
@@ -61,15 +61,14 @@ AnimatedPopup {
         delegate: BackgroundButton {
           btnWidth: 50
           btnHeight: 50
-          color: selected ? Colors.tertiary : hoverHandler.hovered ? Colors.on_primary_container : Colors.primary_container
-
+          color: selected ? Colors.tertiary : hoverHandler.hovered ? Colors.on_primary : Colors.primary
           radius: 25
 
           property bool selected: model.text === BatteryService.powerProfile
 
           btnText: model.icon
           btnTextPointSize: 15
-          btnTextColor: selected ? Colors.on_tertiary : hoverHandler.hovered ? Colors.primary_container : Colors.on_primary_container
+          btnTextColor: selected ? Colors.on_tertiary : hoverHandler.hovered ? Colors.primary : Colors.on_primary
 
           hoverHandler.enabled: !selected
 

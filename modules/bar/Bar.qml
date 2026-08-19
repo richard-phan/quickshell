@@ -27,7 +27,9 @@ Scope {
     PanelWindow {
       required property var modelData
       screen: modelData
-      color: Colors.primary
+
+      color: Colors.surface_bright
+
       anchors {
         top: true
         left: true

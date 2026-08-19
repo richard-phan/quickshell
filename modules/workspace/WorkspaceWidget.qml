@@ -13,7 +13,7 @@ Rectangle {
   width: implicitWidth
   height: implicitHeight
 
-  color: Colors.primary_container
+  color: Colors.primary
   radius: 4
 
   Row {
@@ -26,12 +26,12 @@ Rectangle {
       delegate: Widget {
         horizontalPadding: 7
 
-        bgColor: Hyprland.focusedWorkspace.id === (index + 1) ? Colors.tertiary : Colors.primary_container
+        bgColor: Hyprland.focusedWorkspace.id === (index + 1) ? Colors.tertiary_container : Colors.primary
 
         icon: ""
         text: index + 1
 
-        textColor: Hyprland.focusedWorkspace.id === (index + 1) ? Colors.on_tertiary : Colors.on_primary_container
+        textColor: Hyprland.focusedWorkspace.id === (index + 1) ? Colors.on_tertiary_container : Colors.on_primary
 
         hoverEnabled: !(Hyprland.focusedWorkspace.id === (index + 1))
         tapHandler.onTapped: Hyprland.dispatch(`hl.dsp.focus({ workspace = ${(index + 1)} })`)

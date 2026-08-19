@@ -30,7 +30,7 @@ AnimatedPopup {
 
       Text {
         text: "Bluetooth"
-        color: Colors.on_primary
+        color: Colors.on_surface
         font.bold: true
       }
 

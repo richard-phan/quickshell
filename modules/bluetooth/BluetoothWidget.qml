@@ -26,7 +26,7 @@ Widget {
     }
   }
 
-  bgColor: Colors.primary_container
+  bgColor: Colors.primary
   icon: iconForBluetoothState(Bluetooth.defaultAdapter.state)
   text: {
     let connected = [];
@@ -42,7 +42,7 @@ Widget {
 
     return connected.length + " Connected";
   }
-  textColor: Colors.on_primary_container
+  textColor: Colors.on_primary
 
   MouseArea {
     anchors.fill: parent

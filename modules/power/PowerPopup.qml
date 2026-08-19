@@ -58,12 +58,12 @@ AnimatedPopup {
       delegate: BackgroundButton {
         btnWidth: 40
         btnHeight: 40
-        color: hoverHandler.hovered ? Colors.on_primary_container : Colors.primary_container
+        color: hoverHandler.hovered ? Colors.on_tertiary : Colors.tertiary
 
         radius: 8
 
         btnText: model.icon
-        btnTextColor: hoverHandler.hovered ? Colors.primary_container : Colors.on_primary_container
+        btnTextColor: hoverHandler.hovered ? Colors.tertiary : Colors.on_tertiary
         btnTextPointSize: model.pointSize
 
         tapHandler.onTapped: {
