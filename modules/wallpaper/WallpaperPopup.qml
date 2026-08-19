@@ -31,18 +31,6 @@ AnimatedPopup {
     WindowStates.wallpaperVisible = !WindowStates.wallpaperVisible;
   }
 
-  Process {
-    id: wallpaperProcess
-    running: false
-    command: ["hyprctl", "hyprpaper", "wallpaper", `DP-1,${WallpaperService.selectedUrl},cover`]
-    stdout: StdioCollector {
-      onStreamFinished: {
-        console.log(this.text);
-        console.log(WallpaperService.selectedUrl);
-      }
-    }
-  }
-
   Item {
     focus: true
 
@@ -53,25 +41,29 @@ AnimatedPopup {
 
     Keys.onPressed: event => {
       if (event.key === Qt.Key_H) {
-        if ((WallpaperService.index - 1) <= 0) {
+        if ((WallpaperService.index - 1) < 0) {
           WallpaperService.index = WallpaperService.pictures.count - 1;
-          console.log('pressed');
         } else {
           WallpaperService.index--;
-          wallpaperProcess.running = true;
         }
+        WallpaperService.updateWallpaper();
       } else if (event.key === Qt.Key_L) {
         if ((WallpaperService.index + 1) == WallpaperService.pictures.count) {
           WallpaperService.index = 0;
         } else {
           WallpaperService.index++;
-          wallpaperProcess.running = true;
         }
+        WallpaperService.updateWallpaper();
       } else if (event.key === Qt.Key_Escape) {
         WindowStates.wallpaperVisible = false;
+        WallpaperService.updateTheme();
+
+        // reset wallpaper here
         event.accepted = true;
       } else if (event.key === Qt.Key_Return) {
         WindowStates.wallpaperVisible = false;
+        WallpaperService.updateTheme();
+        event.accepted = true;
       }
     }
 
@@ -103,9 +95,17 @@ AnimatedPopup {
               sourceSize.width: 280
 
               asynchronous: true
+
               source: {
+                if (WallpaperService.pictures.count === 0) {
+                  return "";
+                }
+
                 let rel_index = (index + WallpaperService.index) % WallpaperService.pictures.count;
-                WallpaperService.getFileData(rel_index, "fileUrl").toString().replace("file://", "");
+                let data = WallpaperService.getFileData(rel_index, "fileUrl");
+                if (data)
+                  return data.toString().replace("file://", "");
+                return "";
               }
             }
           }
