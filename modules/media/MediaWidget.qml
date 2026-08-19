@@ -3,7 +3,7 @@ import "../../components"
 
 Widget {
   minWidth: 30
-  bgColor: Colors.primary_container
+  bgColor: Colors.primary
   icon: ""
   text: {
     const maxLength = 40;
@@ -11,5 +11,5 @@ Widget {
 
     return (title.length <= maxLength) ? title : title.substring(0, maxLength) + "...";
   }
-  textColor: Colors.on_primary_container
+  textColor: Colors.on_primary
 }

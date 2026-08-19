@@ -30,7 +30,7 @@ AnimatedPopup {
 
       Text {
         text: "Network"
-        color: Colors.primary_container
+        color: Colors.on_surface
         font.bold: true
       }
 
@@ -44,10 +44,10 @@ AnimatedPopup {
 
         radius: 4
 
-        color: hoverHandler.hovered ? Colors.inverse_primary : "transparent"
+        color: hoverHandler.hovered ? Colors.tertiary : "transparent"
 
         btnText: "󰑐"
-        btnTextColor: hoverHandler.hovered ? Colors.on_primary_container : Colors.on_primary
+        btnTextColor: hoverHandler.hovered ? Colors.on_tertiary : Colors.on_surface
         btnTextPointSize: 14
 
         tapHandler.onTapped: NetworkState.enableScan = true

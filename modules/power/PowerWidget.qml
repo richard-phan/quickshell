@@ -5,9 +5,9 @@ import "../../"
 import "../../components"
 
 Widget {
-  bgColor: Colors.primary_container
+  bgColor: Colors.primary
   icon: ""
-  textColor: Colors.on_primary_container
+  textColor: Colors.on_primary
 
   tapHandler.onTapped: WindowStates.powerVisible = !WindowStates.powerVisible
 }

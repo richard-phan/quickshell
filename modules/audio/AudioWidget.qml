@@ -6,10 +6,10 @@ import "../../components"
 import "../../services"
 
 Widget {
-  bgColor: Colors.primary_container
+  bgColor: Colors.primary
   icon: iconForVolume(AudioService.muted, AudioService.volume)
   text: AudioService.volume + "%"
-  textColor: Colors.on_primary_container
+  textColor: Colors.on_primary
 
   function iconForVolume(muted, volume) {
     if (muted)

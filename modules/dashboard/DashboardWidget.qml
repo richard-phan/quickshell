@@ -4,10 +4,10 @@ import "../../"
 import "../../components"
 
 Widget {
-  bgColor: Colors.primary_container
+  bgColor: Colors.primary
   icon: "󰣇"
   text: ""
-  textColor: Colors.on_primary_container
+  textColor: Colors.on_primary
 
   property var systemDashboard
 

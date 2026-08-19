@@ -9,7 +9,9 @@ Rectangle {
   id: background
   implicitWidth: content.implicitWidth + (2 * horizontalPadding)
   implicitHeight: content.implicitHeight
-  color: hoverHandler.hovered && hoverEnabled ? Colors.inverse_primary : bgColor
+
+  color: hoverHandler.hovered && hoverEnabled ? Colors.tertiary : bgColor
+
   radius: 4
 
   property int minWidth: 5
@@ -25,6 +27,13 @@ Rectangle {
   property alias tapHandler: internalTapHandler
   property alias hoverHandler: internalHoverHandler
 
+  Behavior on color {
+    ColorAnimation {
+      duration: 200
+      easing.type: Easing.Linear
+    }
+  }
+
   RowLayout {
     id: content
     spacing: icon && text ? 5 : 0
@@ -32,19 +41,33 @@ Rectangle {
 
     Text {
       text: background.icon
-      color: background.textColor
+      color: hoverHandler.hovered && hoverEnabled ? Colors.on_secondary : background.textColor
       font.family: "JetBrainsMono Nerd Font"
       font.pointSize: background.iconSize
       Layout.alignment: Qt.AlignVCenter
       font.bold: true
+
+      Behavior on color {
+        ColorAnimation {
+          duration: 200
+          easing.type: Easing.Linear
+        }
+      }
     }
 
     Text {
       text: background.text
-      color: background.textColor
+      color: hoverHandler.hovered && hoverEnabled ? Colors.on_secondary : background.textColor
       Layout.alignment: Qt.AlignVCenter
       font.family: "Inter"
       font.bold: true
+
+      Behavior on color {
+        ColorAnimation {
+          duration: 200
+          easing.type: Easing.Linear
+        }
+      }
     }
   }
 

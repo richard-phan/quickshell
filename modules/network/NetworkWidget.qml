@@ -5,10 +5,10 @@ import "../../"
 import "../../components"
 
 Widget {
-  bgColor: Colors.primary_container
+  bgColor: Colors.primary
   icon: iconForNetworkState(NetworkState.state)
   text: NetworkState.name
-  textColor: Colors.on_primary_container
+  textColor: Colors.on_primary
 
   tapHandler.onTapped: WindowStates.networkVisible = !WindowStates.networkVisible
 

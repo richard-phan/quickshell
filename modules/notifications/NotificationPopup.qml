@@ -38,7 +38,7 @@ AnimatedPopup {
       Text {
         text: "Notifications"
         font.bold: true
-        color: Colors.on_primary
+        color: Colors.on_surface
       }
 
       Item {
@@ -51,10 +51,10 @@ AnimatedPopup {
 
         radius: 5
 
-        color: hoverHandler.hovered ? Colors.inverse_primary : "transparent"
+        color: hoverHandler.hovered ? Colors.tertiary : "transparent"
 
         btnText: "Clear all"
-        btnTextColor: hoverHandler.hovered ? Colors.primary : Colors.on_primary
+        btnTextColor: hoverHandler.hovered ? Colors.on_tertiary : Colors.on_surface
 
         tapHandler.onTapped: NotificationService.clearAll()
       }

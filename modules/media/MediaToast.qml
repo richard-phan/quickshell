@@ -59,7 +59,7 @@ AnimatedPopup {
         font.pointSize: 12
         font.bold: true
 
-        color: Colors.on_primary
+        color: Colors.on_surface
       }
 
       Text {
@@ -69,8 +69,9 @@ AnimatedPopup {
         elide: Text.ElideRight
 
         font.pointSize: 10
+        font.bold: true
 
-        color: Colors.inverse_Primary
+        color: Colors.on_surface
       }
     }
   }
