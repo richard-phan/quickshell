@@ -1,5 +1,4 @@
 pragma Singleton
-pragma Singleton
 
 import Qt.labs.folderlistmodel
 
@@ -8,12 +7,8 @@ import Quickshell
 import Quickshell.Io
 
 Item {
-  readonly property string wallpaperFolderPath: "/home/richard/Pictures/avengers"
+  readonly property string wallpaperFolderPath: "/home/richard/Pictures/Wallpapers/ultrawide"
   readonly property FolderListModel pictures: picturesModel
-  readonly property string selectedUrl: {
-    let rel_index = (index + 2) % WallpaperService.pictures.count;
-    WallpaperService.getFileData(rel_index, "fileUrl").toString().replace("file://", "");
-  }
 
   property int index
 
@@ -31,10 +26,30 @@ Item {
     }
   }
 
+  Process {
+    id: wallpaperProcess
+  }
+
   function getFileData(fileIndex, roleName) {
     if (picturesModel.status === FolderListModel.Ready && fileIndex < picturesModel.count) {
       return picturesModel.get(fileIndex, roleName);
     }
     return;
+  }
+
+  function updateWallpaper() {
+    const rel_index = (index + 2) % WallpaperService.pictures.count;
+    const path = WallpaperService.getFileData(rel_index, "fileUrl").toString().replace("file://", "");
+
+    wallpaperProcess.command = ["./theme_switcher.sh", "-p", path, "-w"];
+    wallpaperProcess.running = true;
+  }
+
+  function updateTheme() {
+    const rel_index = (index + 2) % WallpaperService.pictures.count;
+    const path = WallpaperService.getFileData(rel_index, "fileUrl").toString().replace("file://", "");
+
+    wallpaperProcess.command = ["./theme_switcher.sh", "-p", path, "-t"];
+    wallpaperProcess.running = true;
   }
 }
