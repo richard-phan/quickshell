@@ -49,7 +49,7 @@ Item {
     const rel_index = (index + 2) % WallpaperService.pictures.count;
     const path = WallpaperService.getFileData(rel_index, "fileUrl").toString().replace("file://", "");
 
-    wallpaperProcess.command = [Quickshell.env("HOME") + "./theme_switcher.sh", "-p", path, "-t"];
+    wallpaperProcess.command = [Quickshell.env("HOME") + "/.config/quickshell/services/theme_switcher.sh", "-p", path, "-t"];
     wallpaperProcess.running = true;
   }
 }
