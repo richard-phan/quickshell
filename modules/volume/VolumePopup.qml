@@ -55,10 +55,10 @@ AnimatedPopup {
 
         radius: 4
 
-        color: hoverHandler.hovered ? Colors.on_primary : "transparent"
+        color: hoverHandler.hovered ? Colors.primary : "transparent"
 
         btnText: AudioService.muted ? "" : ""
-        btnTextColor: hoverHandler.hovered ? Colors.primary : Colors.on_primary
+        btnTextColor: hoverHandler.hovered ? Colors.on_primary : Colors.primary
 
         Layout.alignment: Qt.AlignHCenter
 
