@@ -1,8 +1,10 @@
 import QtQuick
 import QtQuick.Layouts
 import Quickshell
+import Quickshell.Networking
 
-import "../"
+import "../../"
+import "../../components"
 
 Rectangle {
   width: entryWidth
@@ -14,16 +16,17 @@ Rectangle {
   property int entryHeight
   property int entryPadding
   property color entryColor
+  property color textColor
 
-  property string networkName
+  property Network network
 
   RowLayout {
     width: parent.width - entryPadding
     anchors.centerIn: parent
 
     Text {
-      text: networkName
-      color: Colors.on_primary_container
+      text: network.name
+      color: textColor
       font.bold: true
     }
 
@@ -37,10 +40,12 @@ Rectangle {
 
       radius: 4
 
-      color: Colors.on_primary_container
+      color: Colors.tertiary
 
-      btnText: true ? "" : ""
+      btnText: network.connected ? "" : ""
       btnTextPointSize: 16
+
+      tapHandler.onTapped: network.connect()
     }
 
     BackgroundButton {
