@@ -6,13 +6,13 @@ import "../../components"
 
 Widget {
   bgColor: Colors.primary
-  icon: iconForNetworkState(NetworkState.state)
-  text: NetworkState.name
+  icon: iconForNetworkService(NetworkService.state)
+  text: NetworkService.name
   textColor: Colors.on_primary
 
   tapHandler.onTapped: WindowStates.networkVisible = !WindowStates.networkVisible
 
-  function iconForNetworkState(state) {
+  function iconForNetworkService(state) {
     switch (state) {
     case ConnectionState.Unknown:
       return "?";

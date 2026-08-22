@@ -3,6 +3,7 @@ singleton BatteryService 1.0 services/BatteryService.qml
 singleton BluetoothService 1.0 services/BluetoothService.qml
 singleton LauncherService 1.0 services/LauncherService.qml
 singleton MediaService 1.0 services/MediaService.qml
+singleton NetworkService 1.0 services/NetworkService.qml
 singleton NotificationService 1.0 services/NotificationService.qml
 singleton SystemService 1.0 services/SystemService.qml
 singleton TimeService 1.0 services/TimeService.qml
